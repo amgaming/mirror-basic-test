@@ -47,10 +47,14 @@
   <ItemGroup>
      <Compile Include="Assets\HelloWorld.cs" />
      <Compile Include="Assets\Scenes\FPSInput.cs" />
+     <Compile Include="Assets\Scenes\Fireball.cs" />
      <Compile Include="Assets\Scenes\MouseLook.cs" />
+     <Compile Include="Assets\Scenes\PlayerCharacter.cs" />
      <Compile Include="Assets\Scenes\RayShooter.cs" />
      <Compile Include="Assets\Scenes\ReactiveTarget.cs" />
+     <Compile Include="Assets\Scenes\SceneController.cs" />
      <Compile Include="Assets\Scenes\Spin.cs" />
+     <Compile Include="Assets\Scenes\WanderingAI.cs" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2019.3.3f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
