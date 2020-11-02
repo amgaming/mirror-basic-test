@@ -17,25 +17,34 @@ public class AudioNetwork : NetworkBehaviour
     }
 
     public void PlaySound(int clipSoundId){
-        if(clipSoundId >= -1 && clipSoundId < clips.Length){
-            CmdSendServerSoundId(clipSoundId);
+        if(clipSoundId >= 0 && clipSoundId < clips.Length){
+            CmdServerPlaySoundId(clipSoundId);
         }   
     }
 
+    public void StopSound(){
+         CmdServerStopSoundId();
+    }
+
     [Command]
-    void CmdSendServerSoundId(int clipSoundId){
-        RpcSendSoundIdToClients(clipSoundId);
+    void CmdServerPlaySoundId(int clipSoundId){
+        RpcSendPlaySoundIdToClients(clipSoundId);
     }
 
     [ClientRpc]
-    void RpcSendSoundIdToClients(int clipSoundId){
-        if(clipSoundId == -1){
-            source.Stop();
-        }
-        else
-        {
-            source.PlayOneShot(clips[clipSoundId]);
-        }
+    void RpcSendPlaySoundIdToClients(int clipSoundId){
+        source.PlayOneShot(clips[clipSoundId]);
     }
 
+    [Command]
+    void CmdServerStopSoundId(){
+        RpcSendStopSoundIdToClients();
+    }
+
+    [ClientRpc]
+    void RpcSendStopSoundIdToClients(){
+        if(source.isPlaying){
+            source.Stop();
+        }
+    }
 }

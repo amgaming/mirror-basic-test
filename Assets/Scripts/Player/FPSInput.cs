@@ -70,7 +70,7 @@ public class FPSInput : NetworkBehaviour
             else
             {
                 isPlayerSprinting = false;
-                audioNetwork.PlaySound(-1);
+                audioNetwork.StopSound();
             }
         }
     }
