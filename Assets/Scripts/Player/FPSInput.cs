@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+[RequireComponent(typeof(AudioNetwork))]
 [RequireComponent(typeof(CharacterController))]
 public class FPSInput : NetworkBehaviour
 {
     public float speed = 6.0f;
     public float sprintSpeedFactor = 2.0f;
     private CharacterController _charController;
-    private AudioSource m_MyAudioSource;
-    bool m_Play;
+    bool isRunningSoundPlaying;
     private Vector3 translationMovement;
+    private AudioNetwork audioNetwork;
+    private bool isPlayerSprinting;
+
     // Start is called before the first frame update
 
     void Start()
     {
         _charController = GetComponent<CharacterController>();
-        m_MyAudioSource = GetComponent<AudioSource>();
-        m_MyAudioSource.volume = 1;
+        audioNetwork = GetComponent<AudioNetwork>();
     }
 
     public override void OnStartLocalPlayer()
@@ -59,16 +61,16 @@ public class FPSInput : NetworkBehaviour
 
             if (Input.GetKey(KeyCode.LeftShift) && (deltaX != 0 || deltaZ != 0))
             {
-                if (m_Play != true)
+                if (isPlayerSprinting != true)
                 {
-                    m_Play = true;
-                    m_MyAudioSource.Play();
+                    isPlayerSprinting = true;
+                    audioNetwork.PlaySound(0);
                 }
             }
             else
             {
-                m_Play = false;
-                m_MyAudioSource.Stop();
+                isPlayerSprinting = false;
+                audioNetwork.StopSound();
             }
         }
     }
