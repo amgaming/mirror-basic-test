@@ -7,14 +7,16 @@ using Mirror;
 public class FPSInput : NetworkBehaviour
 {
     public float speed = 6.0f;
+    public float sprintSpeedFactor = 2.0f; 
     private CharacterController _charController;
-    public const float baseSpeed = 6.0f;
+    private Vector3 translationMovement;
     // Start is called before the first frame update
 
     void Start()
     {
         _charController = GetComponent<CharacterController>();
     }
+
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -34,24 +36,34 @@ public class FPSInput : NetworkBehaviour
         if(isLocalPlayer)
         { 
         
-            float deltaX = Input.GetAxis("Horizontal") * speed;
-            float deltaZ = Input.GetAxis("Vertical") * speed;
-            Vector3 movement = new Vector3(deltaX, 0, deltaZ);
-            movement = Vector3.ClampMagnitude(movement, speed);
+            float finalSpeed = speed;
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                finalSpeed = speed * sprintSpeedFactor;
+            }
+
+            float deltaX = Input.GetAxis("Horizontal") * finalSpeed;
+            float deltaZ = Input.GetAxis("Vertical") * finalSpeed;
+            translationMovement = new Vector3(deltaX, 0, deltaZ);
+            translationMovement = Vector3.ClampMagnitude(translationMovement, finalSpeed);
             //movement.y = gravity;
-            movement *= Time.deltaTime;
-            movement = transform.TransformDirection(movement);
-            _charController.Move(movement);
+            translationMovement *= Time.deltaTime;
+            translationMovement = transform.TransformDirection(translationMovement);
+            _charController.Move(translationMovement);
         }
     }
+
     void Awake()
     {   
         Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
     }
+
     void OnDestroy()
     {
         Messenger<float>.RemoveListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
     }
+
     private void OnSpeedChanged(float value)
     {
         //speed = baseSpeed * value;
