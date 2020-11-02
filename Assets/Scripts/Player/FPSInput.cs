@@ -7,14 +7,18 @@ using Mirror;
 public class FPSInput : NetworkBehaviour
 {
     public float speed = 6.0f;
-    public float sprintSpeedFactor = 2.0f; 
+    public float sprintSpeedFactor = 2.0f;
     private CharacterController _charController;
+    private AudioSource m_MyAudioSource;
+    bool m_Play;
     private Vector3 translationMovement;
     // Start is called before the first frame update
 
     void Start()
     {
         _charController = GetComponent<CharacterController>();
+        m_MyAudioSource = GetComponent<AudioSource>();
+        m_MyAudioSource.volume = 1;
     }
 
     public override void OnStartLocalPlayer()
@@ -24,7 +28,8 @@ public class FPSInput : NetworkBehaviour
         // Turn off main camera because GamePlayer prefab has its own camera
         GetComponentInChildren<Camera>().enabled = true;
 
-        if(Camera.main){
+        if (Camera.main)
+        {
             Camera.main.enabled = false;
         }
 
@@ -33,9 +38,9 @@ public class FPSInput : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isLocalPlayer)
-        { 
-        
+        if (isLocalPlayer)
+        {
+
             float finalSpeed = speed;
 
             if (Input.GetKey(KeyCode.LeftShift))
@@ -51,11 +56,25 @@ public class FPSInput : NetworkBehaviour
             translationMovement *= Time.deltaTime;
             translationMovement = transform.TransformDirection(translationMovement);
             _charController.Move(translationMovement);
+
+            if (Input.GetKey(KeyCode.LeftShift) && (deltaX != 0 || deltaZ != 0))
+            {
+                if (m_Play != true)
+                {
+                    m_Play = true;
+                    m_MyAudioSource.Play();
+                }
+            }
+            else
+            {
+                m_Play = false;
+                m_MyAudioSource.Stop();
+            }
         }
     }
 
     void Awake()
-    {   
+    {
         Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
     }
 
