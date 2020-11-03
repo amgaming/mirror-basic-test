@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Mirror;
 
 public class Interact : NetworkBehaviour
@@ -16,6 +17,10 @@ public class Interact : NetworkBehaviour
     private float interactionTime = 2f;
     private float currentInteractionTimeElapsed = 0f;
     private Item itemToInteractWith;
+    [SerializeField]
+    private RectTransform interactionUiTextPanel;
+    [SerializeField]
+    private Image progressImage;
 
     private void Update()
     {
@@ -28,8 +33,7 @@ public class Interact : NetworkBehaviour
 
         if(HasSelectedItem()){
 
-            // Display UI Message
-            // uiText.SetActive(true);
+            interactionUiTextPanel.gameObject.SetActive(true);
 
             if(Input.GetKey(KeyCode.E)){
                 IncrementInteractionTime();
@@ -38,11 +42,11 @@ public class Interact : NetworkBehaviour
                 currentInteractionTimeElapsed = 0f;
             }
 
-            // UpdateProgressImage();
+            UpdateProgressImage();
         }
         else {
 
-            // uiText.SetActive(false);
+            interactionUiTextPanel.gameObject.SetActive(false);
             currentInteractionTimeElapsed = 0f;
         }
     }
@@ -58,12 +62,13 @@ public class Interact : NetworkBehaviour
         }
     }
 
-    // private void UpdateProgressImage(){
-    //     float percentage = currentInteractionTimeElapsed / interactionTime;
-    //     progressImage.fillAmount = percentage;
-    // }
+    private void UpdateProgressImage(){
+        float percentage = currentInteractionTimeElapsed / interactionTime;
+        progressImage.fillAmount = percentage;
+    }
 
     private void MoveItemToInventory(){
+        //@todo: move this logic to interactable class in each specific item
         Destroy(itemToInteractWith.gameObject);
         itemToInteractWith = null;
     }
