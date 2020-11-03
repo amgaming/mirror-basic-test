@@ -11,10 +11,8 @@ public class AudioNetwork : NetworkBehaviour
     public AudioClip[] clips;
 
     // Start is called before the first frame update
-    public override void OnStartLocalPlayer()
+    void Start()
     {
-        base.OnStartLocalPlayer();
-        
         source = GetComponent<AudioSource>();
     }
 
@@ -45,7 +43,7 @@ public class AudioNetwork : NetworkBehaviour
 
     [ClientRpc]
     void RpcSendStopSoundIdToClients(){
-        if(source.isPlaying){
+        if(source != null && source.isPlaying){
             source.Stop();
         }
     }
