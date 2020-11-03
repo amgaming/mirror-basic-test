@@ -14,7 +14,7 @@ public class FPSInput : NetworkBehaviour
     private Vector3 translationMovement;
     private AudioNetwork audioNetwork;
     private bool isPlayerSprinting;
-    public bool isPlayerTrapped;
+    private bool isPlayerMovementEnabled = true;
 
     // Start is called before the first frame update
 
@@ -22,7 +22,6 @@ public class FPSInput : NetworkBehaviour
     {
         _charController = GetComponent<CharacterController>();
         audioNetwork = GetComponent<AudioNetwork>();
-        isPlayerTrapped = false;
     }
 
     public override void OnStartLocalPlayer()
@@ -42,9 +41,13 @@ public class FPSInput : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isPlayerTrapped);
-        if (isLocalPlayer && isPlayerTrapped == false)
+
+        if (isLocalPlayer)
         {
+
+            if(!IsPlayerMovementEnabled()){
+                return;
+            }
 
             float finalSpeed = speed;
 
@@ -78,25 +81,16 @@ public class FPSInput : NetworkBehaviour
         }
     }
 
-    void Awake()
+    public void enableMovement(bool state)
     {
-        Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+        isPlayerMovementEnabled = state;
     }
 
-    void OnDestroy()
+    public bool IsPlayerMovementEnabled()
     {
-        Messenger<float>.RemoveListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+        return isPlayerMovementEnabled;
     }
 
-    private void OnSpeedChanged(float value)
-    {
-        //speed = baseSpeed * value;
-    }
-
-    public void toggleTrapped()
-    {
-        isPlayerTrapped = true;
-    }
 
     /* public override void OnStartLocalPlayer()
     {
