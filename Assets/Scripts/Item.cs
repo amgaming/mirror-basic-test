@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public Transform player;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,10 @@ public class Item : MonoBehaviour
     void Update()
     {
         
+    }
+    void OnTriggerEnter(Collider col)
+    {
+        Debug.Log("trampa pisada!");
+        player.GetComponent<FPSInput>().toggleTrapped();
     }
 }
