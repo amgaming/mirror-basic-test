@@ -11,8 +11,10 @@ public class AudioNetwork : NetworkBehaviour
     public AudioClip[] clips;
 
     // Start is called before the first frame update
-    void Start()
+    public override void OnStartLocalPlayer()
     {
+        base.OnStartLocalPlayer();
+        
         source = GetComponent<AudioSource>();
     }
 
@@ -23,7 +25,7 @@ public class AudioNetwork : NetworkBehaviour
     }
 
     public void StopSound(){
-         CmdServerStopSoundId();
+        CmdServerStopSoundId();
     }
 
     [Command]
