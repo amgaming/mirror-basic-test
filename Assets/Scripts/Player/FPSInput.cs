@@ -15,6 +15,7 @@ public class FPSInput : NetworkBehaviour
     private AudioNetwork audioNetwork;
     private bool isPlayerSprinting;
     private bool isPlayerMovementEnabled = true;
+    private Item itemToInteractWith;
 
     // Start is called before the first frame update
 
@@ -45,7 +46,8 @@ public class FPSInput : NetworkBehaviour
         if (isLocalPlayer)
         {
 
-            if(!IsPlayerMovementEnabled()){
+            if (!IsPlayerMovementEnabled())
+            {
                 return;
             }
 
@@ -79,6 +81,14 @@ public class FPSInput : NetworkBehaviour
                 audioNetwork.StopSound();
             }
         }
+    }
+
+    public void addItem(Item item)
+    {
+        itemToInteractWith = item;
+        itemToInteractWith.gameObject.transform.parent = transform;
+        itemToInteractWith.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+        itemToInteractWith.gameObject.transform.position = new Vector3(-12f, -1f, -1f);
     }
 
     public void enableMovement(bool state)

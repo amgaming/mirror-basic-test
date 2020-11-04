@@ -53,7 +53,7 @@ public class Item : NetworkBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("trampa pisada! ");
-        enablePlayerMovement(false);
+        Debug.Log("trampa pisada! ", col);
+        //enablePlayerMovement(false);
     }
 }

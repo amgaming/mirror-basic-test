@@ -69,8 +69,10 @@ public class Interact : NetworkBehaviour
 
     private void MoveItemToInventory(){
         //@todo: move this logic to interactable class in each specific item
-        Destroy(itemToInteractWith.gameObject);
-        itemToInteractWith = null;
+        GameObject playerGameObject = GameObject.FindWithTag("Player");
+        playerGameObject.GetComponent<FPSInput>().addItem(itemToInteractWith);
+        /* Destroy(itemToInteractWith.gameObject);
+        itemToInteractWith = null; */
     }
 
     private void selectItemFromCameraRay()
