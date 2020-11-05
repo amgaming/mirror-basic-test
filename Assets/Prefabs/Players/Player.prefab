@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 5007649228757210731}
   - component: {fileID: 4648417310980680135}
   - component: {fileID: 4648417310980680129}
-  - component: {fileID: 3290593743571861353}
   - component: {fileID: 5882243339613107011}
   - component: {fileID: 4840055232784320766}
   - component: {fileID: 8548725169878991617}
@@ -266,27 +265,6 @@ MonoBehaviour:
   sensitivityVert: 9
   minimumVert: -45
   maximumVert: 45
---- !u!114 &3290593743571861353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4648417310980680186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1afa63e0edc8b9c4d8d942a4f1347cb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  camera: {fileID: 4648417310471560599}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  interactionTime: 1
-  interactionUiTextPanel: {fileID: 0}
-  progressImage: {fileID: 0}
 --- !u!114 &5882243339613107011
 MonoBehaviour:
   m_ObjectHideFlags: 0

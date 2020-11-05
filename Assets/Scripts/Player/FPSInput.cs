@@ -16,6 +16,8 @@ public class FPSInput : NetworkBehaviour
     private bool isPlayerSprinting;
     private bool isPlayerMovementEnabled = true;
     private Item itemToInteractWith;
+    public static GameObject LocalPlayer;
+    public static CharacterController LocalPlayerController;
 
     // Start is called before the first frame update
 
@@ -23,6 +25,8 @@ public class FPSInput : NetworkBehaviour
     {
         _charController = GetComponent<CharacterController>();
         audioNetwork = GetComponent<AudioNetwork>();
+
+        LocalPlayerController = _charController;
     }
 
     public override void OnStartLocalPlayer()
@@ -37,7 +41,9 @@ public class FPSInput : NetworkBehaviour
             Camera.main.enabled = false;
         }
 
+        LocalPlayer = gameObject;
     }
+ 
 
     // Update is called once per frame
     void Update()
@@ -86,9 +92,9 @@ public class FPSInput : NetworkBehaviour
     public void addItem(Item item)
     {
         itemToInteractWith = item;
-        itemToInteractWith.gameObject.transform.parent = transform;
-        itemToInteractWith.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-        itemToInteractWith.gameObject.transform.position = new Vector3(-12f, -1f, -1f);
+        itemToInteractWith.gameObject.transform.parent = _charController.transform;
+        //itemToInteractWith.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+        itemToInteractWith.gameObject.transform.position =  new Vector3(_charController.transform.position.x - 2, _charController.transform.position.y - 2, _charController.transform.position.z - 2);
     }
 
     public void releaseItem()

@@ -10,6 +10,7 @@ public class Item : NetworkBehaviour
     // private FPSInput player;
     public float trappedInterval = 2f;
     private float currentIntervalElapsed = 0f;
+    public float interactionTime = 2f;
 
     //  public override void OnStartLocalPlayer()
     // {
@@ -20,7 +21,7 @@ public class Item : NetworkBehaviour
 
     // }
 
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -36,6 +37,13 @@ public class Item : NetworkBehaviour
 
         if(currentIntervalElapsed >= trappedInterval){
             enablePlayerMovement(true);
+            
+            Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
+
+            if(interact != null){
+                interact.SetItem(this);
+            }
+
             currentIntervalElapsed = 0f;
         }
     }
@@ -45,7 +53,6 @@ public class Item : NetworkBehaviour
         GameObject playerGameObject = GameObject.FindWithTag("Player");
        
         if(playerGameObject != null){
-            Debug.Log("aqui " + state);
             playerGameObject.GetComponent<FPSInput>().enableMovement(state);
             isTrapped = !state;
         }
@@ -53,7 +60,27 @@ public class Item : NetworkBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("trampa pisada! ", col);
-        //enablePlayerMovement(false);
+        Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
+
+        if(interact != null){
+            interact.SetItem(null);
+        }
+        enablePlayerMovement(false);
+    }
+
+    public void Interact()
+    {
+        moveItem();
+    }
+
+    public void moveItem()
+    { 
+        FPSInput.LocalPlayer.GetComponent<FPSInput>().addItem(this);
+        // gameObject.transform.parent = FPSInput.LocalPlayerController.transform;
+        // gameObject.transform.localPosition =  new Vector3(0, 0, 0);
+    }
+
+    public float GetInteractionTime(){
+        return interactionTime;
     }
 }
