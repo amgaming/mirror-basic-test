@@ -21,76 +21,116 @@ public class Interact : NetworkBehaviour
     private RectTransform interactionUiTextPanel;
     [SerializeField]
     private Image progressImage;
+    private GameObject playerGameObject;
+    public bool withItem;
+
+    // Start is called before the first frame update
+
+    void Start()
+    {
+        withItem = false;
+        playerGameObject = GameObject.FindWithTag("Player");
+    }
 
     private void Update()
     {
 
-        if(!isLocalPlayer){ 
+        if (!isLocalPlayer)
+        {
             return;
         }
 
         selectItemFromCameraRay();
+        if (HasSelectedItem() || withItem)
+        {
+            if (!withItem)
+            {
+                interactionUiTextPanel.gameObject.SetActive(true);
+            }
 
-        if(HasSelectedItem()){
-
-            interactionUiTextPanel.gameObject.SetActive(true);
-
-            if(Input.GetKey(KeyCode.E)){
+            if (Input.GetKey(KeyCode.E))
+            {
                 IncrementInteractionTime();
             }
-            else {
+            else
+            {
                 currentInteractionTimeElapsed = 0f;
             }
 
             UpdateProgressImage();
         }
-        else {
+        else
+        {
 
             interactionUiTextPanel.gameObject.SetActive(false);
             currentInteractionTimeElapsed = 0f;
         }
     }
 
-    private bool HasSelectedItem(){
+    private bool HasSelectedItem()
+    {
         return itemToInteractWith != null;
     }
 
-    private void IncrementInteractionTime(){
+    private void IncrementInteractionTime()
+    {
         currentInteractionTimeElapsed += Time.deltaTime;
-        if(currentInteractionTimeElapsed >= interactionTime){
-            MoveItemToInventory();
+        if (currentInteractionTimeElapsed >= interactionTime)
+        {
+            if (withItem)
+            {
+
+                ReleaseItemFromInventory();
+
+            }
+            else
+            {
+                MoveItemToInventory();
+            }
+
         }
     }
 
-    private void UpdateProgressImage(){
+    private void UpdateProgressImage()
+    {
         float percentage = currentInteractionTimeElapsed / interactionTime;
         progressImage.fillAmount = percentage;
     }
 
-    private void MoveItemToInventory(){
-        //@todo: move this logic to interactable class in each specific item
-        GameObject playerGameObject = GameObject.FindWithTag("Player");
+    private void MoveItemToInventory()
+    {
+        withItem = true;
+        currentInteractionTimeElapsed = 0f;
         playerGameObject.GetComponent<FPSInput>().addItem(itemToInteractWith);
-        /* Destroy(itemToInteractWith.gameObject);
-        itemToInteractWith = null; */
+    }
+
+    private void ReleaseItemFromInventory()
+    {
+        withItem = false;
+        itemToInteractWith = null;
+        currentInteractionTimeElapsed = 0f;
+        playerGameObject.GetComponent<FPSInput>().releaseItem();
     }
 
     private void selectItemFromCameraRay()
     {
         Ray ray = camera.ViewportPointToRay(Vector3.one / 2.0f);
-        // Debug.DrawRay(ray.origin, ray.direction * 2.0f, Color.red);
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit, 2.0f, layerMask)){
+        if (Physics.Raycast(ray, out hit, 2.0f, layerMask))
+        {
             var itemFound = hit.collider.GetComponent<Item>();
-            if(itemFound != null && itemFound != itemToInteractWith){
+            if (itemFound != null && itemFound != itemToInteractWith)
+            {
                 itemToInteractWith = itemFound;
             }
-            else{
+            else
+            {
                 itemFound = null;
             }
-        } 
-        else{
+        }
+        else
+        {
             itemToInteractWith = null;
         }
     }

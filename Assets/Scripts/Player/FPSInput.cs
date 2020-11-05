@@ -91,6 +91,12 @@ public class FPSInput : NetworkBehaviour
         itemToInteractWith.gameObject.transform.position = new Vector3(-12f, -1f, -1f);
     }
 
+    public void releaseItem()
+    {
+        Debug.Log("releaseItem()");
+        itemToInteractWith.gameObject.transform.parent = GameObject.FindWithTag("Room").transform;
+    }
+
     public void enableMovement(bool state)
     {
         isPlayerMovementEnabled = state;
