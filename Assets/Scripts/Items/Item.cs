@@ -10,7 +10,7 @@ public class Item : NetworkBehaviour
     // private FPSInput player;
     public float trappedInterval = 2f;
     private float currentIntervalElapsed = 0f;
-    public float interactionTime = 2f;
+    
 
     //  public override void OnStartLocalPlayer()
     // {
@@ -41,7 +41,7 @@ public class Item : NetworkBehaviour
             Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
 
             if(interact != null){
-                interact.SetItem(this);
+                interact.SetItem(this.gameObject.transform.parent.GetComponent<ItemCollider>());
             }
 
             currentIntervalElapsed = 0f;
@@ -66,21 +66,5 @@ public class Item : NetworkBehaviour
             interact.SetItem(null);
         }
         enablePlayerMovement(false);
-    }
-
-    public void Interact()
-    {
-        moveItem();
-    }
-
-    public void moveItem()
-    { 
-        FPSInput.LocalPlayer.GetComponent<FPSInput>().addItem(this);
-        // gameObject.transform.parent = FPSInput.LocalPlayerController.transform;
-        // gameObject.transform.localPosition =  new Vector3(0, 0, 0);
-    }
-
-    public float GetInteractionTime(){
-        return interactionTime;
     }
 }

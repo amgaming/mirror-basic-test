@@ -8,7 +8,7 @@ public class Interact : NetworkBehaviour
 {
  
     private float currentInteractionTimeElapsed = 0f;
-    private Item itemFound;
+    private ItemCollider itemFound;
     private GameObject interactionUI;
     private Image progressImage;
 
@@ -69,7 +69,7 @@ public class Interact : NetworkBehaviour
         progressImage.fillAmount = percentage;
     }
 
-    public void SetItem(Item item)
+    public void SetItem(ItemCollider item)
     {
         itemFound = item;
     }

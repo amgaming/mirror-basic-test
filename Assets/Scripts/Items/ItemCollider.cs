@@ -6,6 +6,7 @@ using Mirror;
 
 public class ItemCollider : NetworkBehaviour
 {
+    public float interactionTime = 2f;
 
     // public override void OnStartLocalPlayer()
     // {
@@ -18,7 +19,7 @@ public class ItemCollider : NetworkBehaviour
         Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
         
         if(interact != null){
-            interact.SetItem(gameObject.transform.GetChild(0).GetComponent<Item>());
+            interact.SetItem(gameObject.transform.GetComponent<ItemCollider>());
         }
     }
 
@@ -29,5 +30,21 @@ public class ItemCollider : NetworkBehaviour
         if(interact != null){
             interact.SetItem(null);
         }
+    }
+
+    public void Interact()
+    {
+        moveItem();
+    }
+
+    public void moveItem()
+    { 
+        FPSInput.LocalPlayer.GetComponent<FPSInput>().addItem(this.GetComponent<ItemCollider>());
+        // gameObject.transform.parent = FPSInput.LocalPlayerController.transform;
+        // gameObject.transform.localPosition =  new Vector3(0, 0, 0);
+    }
+
+    public float GetInteractionTime(){
+        return interactionTime;
     }
 }

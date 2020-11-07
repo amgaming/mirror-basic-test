@@ -15,7 +15,7 @@ public class FPSInput : NetworkBehaviour
     private AudioNetwork audioNetwork;
     private bool isPlayerSprinting;
     private bool isPlayerMovementEnabled = true;
-    private Item itemToInteractWith;
+    private ItemCollider itemToInteractWith;
     public static GameObject LocalPlayer;
     public static CharacterController LocalPlayerController;
 
@@ -89,7 +89,7 @@ public class FPSInput : NetworkBehaviour
         }
     }
 
-    public void addItem(Item item)
+    public void addItem(ItemCollider item)
     {
         itemToInteractWith = item;
         itemToInteractWith.gameObject.transform.parent = _charController.transform;
