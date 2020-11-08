@@ -19,6 +19,8 @@ public class FPSInput : NetworkBehaviour
     public static GameObject LocalPlayer;
     public static CharacterController LocalPlayerController;
 
+    private Camera camera;
+
     // Start is called before the first frame update
 
     void Start()
@@ -34,7 +36,9 @@ public class FPSInput : NetworkBehaviour
         base.OnStartLocalPlayer();
 
         // Turn off main camera because GamePlayer prefab has its own camera
-        GetComponentInChildren<Camera>().enabled = true;
+        camera = GetComponentInChildren<Camera>();
+        
+        camera.enabled = true;
 
         if (Camera.main)
         {
@@ -66,12 +70,15 @@ public class FPSInput : NetworkBehaviour
 
             float deltaX = Input.GetAxis("Horizontal") * finalSpeed;
             float deltaZ = Input.GetAxis("Vertical") * finalSpeed;
-            translationMovement = new Vector3(deltaX, 0, deltaZ);
+            
+            // translationMovement = new Vector3(deltaX, 0, deltaZ);
+            translationMovement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(deltaX, 0, deltaZ);
             translationMovement = Vector3.ClampMagnitude(translationMovement, finalSpeed);
-            //movement.y = gravity;
+
             translationMovement *= Time.deltaTime;
-            translationMovement = transform.TransformDirection(translationMovement);
+            // translationMovement = transform.TransformDirection(translationMovement);
             _charController.Move(translationMovement);
+
 
             if (Input.GetKey(KeyCode.LeftShift) && (deltaX != 0 || deltaZ != 0))
             {
