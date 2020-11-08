@@ -19,7 +19,7 @@ public class ItemCollider : NetworkBehaviour
         Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
         
         if(interact != null){
-            interact.SetItem(gameObject.transform.GetComponent<ItemCollider>());
+            interact.SetItem(this);
         }
     }
 
@@ -39,7 +39,7 @@ public class ItemCollider : NetworkBehaviour
 
     public void moveItem()
     { 
-        FPSInput.LocalPlayer.GetComponent<FPSInput>().addItem(this.GetComponent<ItemCollider>());
+        FPSInput.LocalPlayer.GetComponent<FPSInput>().addItem(this);
         // gameObject.transform.parent = FPSInput.LocalPlayerController.transform;
         // gameObject.transform.localPosition =  new Vector3(0, 0, 0);
     }
