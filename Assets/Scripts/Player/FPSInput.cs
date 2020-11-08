@@ -92,9 +92,9 @@ public class FPSInput : NetworkBehaviour
     public void addItem(ItemCollider item)
     {
         itemToInteractWith = item;
-        itemToInteractWith.gameObject.transform.parent = _charController.transform;
+        itemToInteractWith.gameObject.transform.parent = transform;
         //itemToInteractWith.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-        itemToInteractWith.gameObject.transform.position =  new Vector3(_charController.transform.position.x - 2, _charController.transform.position.y - 2, _charController.transform.position.z - 2);
+        itemToInteractWith.gameObject.transform.position =  new Vector3(0, 0, 0);
     }
 
     public void releaseItem()

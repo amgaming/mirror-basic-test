@@ -6,16 +6,20 @@ using Mirror;
 
 public class Interact : NetworkBehaviour
 {
- 
+
     private float currentInteractionTimeElapsed = 0f;
     private ItemCollider itemFound;
     private GameObject interactionUI;
     private Image progressImage;
+    private GameObject playerGameObject;
+    public bool itemActive;
 
     void Start()
     {
         interactionUI = GameObject.Find("InteractionUI");
         progressImage = GameObject.Find("InteractionProgressImage").GetComponent<Image>();
+        itemActive = false;
+        playerGameObject = GameObject.FindWithTag("Player");
     }
 
     private void Update()
@@ -26,9 +30,12 @@ public class Interact : NetworkBehaviour
             return;
         }
 
-        if (HasItem() )
+        if (HasItem() || itemActive)
         {
-            interactionUI.SetActive(true);
+            if (!itemActive)
+            {
+                interactionUI.SetActive(true);
+            }
 
             if (Input.GetKey(KeyCode.E))
             {
@@ -59,18 +66,36 @@ public class Interact : NetworkBehaviour
         currentInteractionTimeElapsed += Time.deltaTime;
         if (currentInteractionTimeElapsed >= itemFound.GetInteractionTime())
         {
-            itemFound.Interact();
+            if (itemActive)
+            {
+                itemActive = false;
+                itemFound.ReleaseItem();
+                SetItem(null);
+            }
+            else
+            {
+                itemActive = true;
+                itemFound.Interact();
+            }
+            currentInteractionTimeElapsed = 0f;
         }
     }
 
     private void UpdateProgressImage()
     {
-        float percentage = currentInteractionTimeElapsed / itemFound.GetInteractionTime();
-        progressImage.fillAmount = percentage;
+        if (HasItem())
+        {
+            float percentage = currentInteractionTimeElapsed / itemFound.GetInteractionTime();
+            progressImage.fillAmount = percentage;
+        }
     }
 
     public void SetItem(ItemCollider item)
     {
+        if (itemActive)
+        {
+            return;
+        }
         itemFound = item;
     }
 

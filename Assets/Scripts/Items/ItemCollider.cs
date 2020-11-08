@@ -37,11 +37,21 @@ public class ItemCollider : NetworkBehaviour
         moveItem();
     }
 
+    public void ReleaseItem()
+    {
+        release();
+    }
+
     public void moveItem()
     { 
         FPSInput.LocalPlayer.GetComponent<FPSInput>().addItem(this.GetComponent<ItemCollider>());
         // gameObject.transform.parent = FPSInput.LocalPlayerController.transform;
         // gameObject.transform.localPosition =  new Vector3(0, 0, 0);
+    }
+
+    private void release()
+    {
+        FPSInput.LocalPlayer.GetComponent<FPSInput>().releaseItem();
     }
 
     public float GetInteractionTime(){
