@@ -8,23 +8,28 @@ public class ItemCollider : NetworkBehaviour
 {
     public float interactionTime = 2f;
 
-    // public override void OnStartLocalPlayer()
-    // {
-    //     base.OnStartLocalPlayer();
-    //     player = GameObject.FindWithTag("Player").GetComponent<Interact>();
-    // }
 
     void OnTriggerEnter(Collider col)
     {
+
+        if(col.tag != "Player"){
+            return;
+        }
+
         Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
-        
+
         if(interact != null){
             interact.SetItem(this);
         }
     }
 
-    void OnTriggerExit()
+    void OnTriggerExit(Collider col)
     {
+
+        if(col.tag != "Player"){
+            return;
+        }
+
         Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
 
         if(interact != null){

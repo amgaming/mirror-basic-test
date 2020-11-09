@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+// using Mirror;
 
-public class Item : NetworkBehaviour
+public class Item : MonoBehaviour
 {
 
     private bool isTrapped = false;
@@ -23,7 +23,7 @@ public class Item : NetworkBehaviour
     // }
     void Start()
     {
-            this.GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.white);
+        this.GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.white);
     }
 
     // Update is called once per frame
@@ -82,9 +82,15 @@ public class Item : NetworkBehaviour
 
     void OnTriggerEnter(Collider col)
     {
+
+        if(col.tag != "Player"){
+            return;
+        }
+
         if(!isCharged) {
             return;
         }
+        
         Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
 
         if (interact != null)

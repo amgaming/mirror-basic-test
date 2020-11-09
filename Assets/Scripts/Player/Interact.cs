@@ -18,8 +18,8 @@ public class Interact : NetworkBehaviour
     {
         interactionUI = GameObject.Find("InteractionUI");
         progressImage = GameObject.Find("InteractionProgressImage").GetComponent<Image>();
-        itemActive = false;
         playerGameObject = GameObject.FindWithTag("Player");
+        itemActive = false;
     }
 
     private void Update()
