@@ -29,6 +29,7 @@ public class FPSInput : NetworkBehaviour
         audioNetwork = GetComponent<AudioNetwork>();
 
         LocalPlayerController = _charController;
+        transform.parent = GameObject.FindWithTag("Room").transform;
     }
 
     public override void OnStartLocalPlayer()
@@ -99,9 +100,12 @@ public class FPSInput : NetworkBehaviour
     public void addItem(ItemCollider item)
     {
         itemToInteractWith = item;
-        itemToInteractWith.gameObject.transform.parent = transform;
+        itemToInteractWith.transform.position =  transform.position;
+        itemToInteractWith.transform.parent = this.transform;
+        itemToInteractWith.transform.localPosition =  new Vector3(1f, 0.5f, 1f);
+        //itemToInteractWith.transform.position.y =  this.transform.rotation;
+        //itemToInteractWith.transform.localPosition =  Vector3.zero;
         //itemToInteractWith.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-        itemToInteractWith.gameObject.transform.position =  new Vector3(0, 0, 0);
     }
 
     public void releaseItem()
