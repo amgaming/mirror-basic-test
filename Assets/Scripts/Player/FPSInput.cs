@@ -73,7 +73,7 @@ public class FPSInput : NetworkBehaviour
             float deltaZ = Input.GetAxis("Vertical") * finalSpeed;
             
             // translationMovement = new Vector3(deltaX, 0, deltaZ);
-            translationMovement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(deltaX, 0, deltaZ);
+            translationMovement = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * new Vector3(deltaX, -9.8f, deltaZ);
             translationMovement = Vector3.ClampMagnitude(translationMovement, finalSpeed);
 
             translationMovement *= Time.deltaTime;
@@ -103,6 +103,7 @@ public class FPSInput : NetworkBehaviour
         itemToInteractWith.transform.position =  transform.position;
         itemToInteractWith.transform.parent = this.transform;
         itemToInteractWith.transform.localPosition =  new Vector3(1f, 0.5f, 1f);
+        itemToInteractWith.GetComponentInChildren<Item>().transform.localPosition = Vector3.zero;
         //itemToInteractWith.transform.position.y =  this.transform.rotation;
         //itemToInteractWith.transform.localPosition =  Vector3.zero;
         //itemToInteractWith.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
