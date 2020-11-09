@@ -112,6 +112,7 @@ public class FPSInput : NetworkBehaviour
     public void releaseItem()
     {
         Debug.Log("releaseItem()");
+        itemToInteractWith.transform.localPosition =  new Vector3(1f, 0.5f, 4f);
         itemToInteractWith.gameObject.transform.parent = GameObject.FindWithTag("Room").transform;
     }
 

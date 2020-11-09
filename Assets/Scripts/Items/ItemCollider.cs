@@ -45,6 +45,7 @@ public class ItemCollider : NetworkBehaviour
     public void moveItem()
     { 
         this.GetComponentInChildren<Rigidbody>().useGravity = false;
+        this.GetComponentInChildren<Item>().setCharged(false);
         FPSInput.LocalPlayer.GetComponent<FPSInput>().addItem(this);
         // gameObject.transform.parent = FPSInput.LocalPlayerController.transform;
         // gameObject.transform.localPosition =  new Vector3(0, 0, 0);
@@ -54,6 +55,14 @@ public class ItemCollider : NetworkBehaviour
     {
         this.GetComponentInChildren<Rigidbody>().useGravity = true;
         FPSInput.LocalPlayer.GetComponent<FPSInput>().releaseItem();
+        StartCoroutine(setCharged());
+    }
+
+    private IEnumerator setCharged()
+    {
+        yield return new WaitForSeconds(1);
+
+        this.GetComponentInChildren<Item>().setCharged(true);
     }
 
     public float GetInteractionTime(){
