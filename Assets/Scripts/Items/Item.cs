@@ -11,7 +11,20 @@ public class Item : MonoBehaviour
     // private FPSInput player;
     public float trappedInterval = 2f;
     private float currentIntervalElapsed = 0f;
+    private GameObject localPlayer;
 
+    GameObject GetLocalPlayer()
+    {
+
+        if(localPlayer != null)
+        {
+            return localPlayer;
+        }
+
+        localPlayer = GameObject.Find("LocalPlayer");
+
+        return localPlayer;
+    }
 
     //  public override void OnStartLocalPlayer()
     // {
@@ -23,7 +36,7 @@ public class Item : MonoBehaviour
     // }
     void Start()
     {
-        this.GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.white);
+        gameObject.transform.parent.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
     }
 
     // Update is called once per frame
@@ -46,11 +59,11 @@ public class Item : MonoBehaviour
 
             enablePlayerMovement(true);
 
-            Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
+            Interact interact = GetLocalPlayer().GetComponent<Interact>();
 
             if (interact != null)
             {
-                interact.SetItem(this.gameObject.transform.parent.GetComponent<ItemCollider>());
+                interact.SetItem(gameObject.transform.parent.GetComponent<ItemInteract>());
             }
 
             currentIntervalElapsed = 0f;
@@ -60,10 +73,10 @@ public class Item : MonoBehaviour
     public void setCharged(bool state)
     {
         if (state) {
-            this.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.5f, 0.5f, 0.1f, 0.8f));
+            gameObject.transform.parent.GetComponent<Renderer>().material.SetColor("_Color", new Color(0.5f, 0.5f, 0.1f, 0.8f));
         }
         else {
-            this.GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.white);
+            gameObject.transform.parent.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
         }
         isCharged = state;
     }
@@ -71,7 +84,7 @@ public class Item : MonoBehaviour
     void enablePlayerMovement(bool state)
     {
 
-        GameObject playerGameObject = GameObject.FindWithTag("Player");
+        GameObject playerGameObject = GetLocalPlayer();
 
         if (playerGameObject != null)
         {
@@ -83,7 +96,8 @@ public class Item : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
 
-        if(col.tag != "Player"){
+        Debug.Log("OnTriggerEnter BOX COLLIDER " + col.name);
+        if(col.name != "LocalPlayer"){
             return;
         }
 
@@ -91,12 +105,13 @@ public class Item : MonoBehaviour
             return;
         }
         
-        Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
+        Interact interact = GetLocalPlayer().GetComponent<Interact>();
 
         if (interact != null)
         {
             interact.SetItem(null);
         }
         enablePlayerMovement(false);
+
     }
 }

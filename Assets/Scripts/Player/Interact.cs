@@ -8,17 +8,15 @@ public class Interact : NetworkBehaviour
 {
 
     private float currentInteractionTimeElapsed = 0f;
-    private ItemCollider itemFound;
+    private ItemInteract itemFound;
     private GameObject interactionUI;
     private Image progressImage;
-    private GameObject playerGameObject;
     public bool itemActive;
 
     void Start()
     {
         interactionUI = GameObject.Find("InteractionUI");
         progressImage = GameObject.Find("InteractionProgressImage").GetComponent<Image>();
-        playerGameObject = GameObject.FindWithTag("Player");
         itemActive = false;
     }
 
@@ -90,7 +88,7 @@ public class Interact : NetworkBehaviour
         }
     }
 
-    public void SetItem(ItemCollider item)
+    public void SetItem(ItemInteract item)
     {
         if (itemActive)
         {

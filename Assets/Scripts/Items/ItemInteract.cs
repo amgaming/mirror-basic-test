@@ -4,19 +4,35 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
 
-public class ItemCollider : NetworkBehaviour
+public class ItemInteract : NetworkBehaviour
 {
     public float interactionTime = 2f;
+
+    private GameObject localPlayer;
+
+    GameObject GetLocalPlayer()
+    {
+
+        if(localPlayer != null)
+        {
+            return localPlayer;
+        }
+
+        localPlayer = GameObject.Find("LocalPlayer");
+
+        return localPlayer;
+    }
 
 
     void OnTriggerEnter(Collider col)
     {
-
-        if(col.tag != "Player"){
+        Debug.Log("OnTriggerEnter SPHERE COLLIDER " + col.name);
+        
+        if(col.name != "LocalPlayer"){
             return;
         }
 
-        Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
+        Interact interact = GetLocalPlayer().GetComponent<Interact>();
 
         if(interact != null){
             interact.SetItem(this);
@@ -26,11 +42,13 @@ public class ItemCollider : NetworkBehaviour
     void OnTriggerExit(Collider col)
     {
 
-        if(col.tag != "Player"){
+        Debug.Log("OnTriggerExit SPHERE COLLIDER " + col.name);
+        
+        if(col.name != "LocalPlayer"){
             return;
         }
 
-        Interact interact = FPSInput.LocalPlayer.GetComponent<Interact>();
+        Interact interact = GetLocalPlayer().GetComponent<Interact>();
 
         if(interact != null){
             interact.SetItem(null);
@@ -49,17 +67,17 @@ public class ItemCollider : NetworkBehaviour
 
     public void moveItem()
     { 
-        this.GetComponentInChildren<Rigidbody>().useGravity = false;
+        this.GetComponent<Rigidbody>().useGravity = false;
         this.GetComponentInChildren<Item>().setCharged(false);
-        FPSInput.LocalPlayer.GetComponent<FPSInput>().addItem(this);
+        GetLocalPlayer().GetComponent<FPSInput>().addItem(this);
         // gameObject.transform.parent = FPSInput.LocalPlayerController.transform;
         // gameObject.transform.localPosition =  new Vector3(0, 0, 0);
     }
 
     private void release()
     {
-        this.GetComponentInChildren<Rigidbody>().useGravity = true;
-        FPSInput.LocalPlayer.GetComponent<FPSInput>().releaseItem();
+        this.GetComponent<Rigidbody>().useGravity = true;
+        GetLocalPlayer().GetComponent<FPSInput>().releaseItem();
         StartCoroutine(setCharged());
     }
 

@@ -15,22 +15,19 @@ public class FPSInput : NetworkBehaviour
     private AudioNetwork audioNetwork;
     private bool isPlayerSprinting;
     private bool isPlayerMovementEnabled = true;
-    private ItemCollider itemToInteractWith;
-    public static GameObject LocalPlayer;
-    public static CharacterController LocalPlayerController;
+    private ItemInteract itemToInteractWith;
+    
 
     private Camera camera;
 
     // Start is called before the first frame update
-
     void Start()
     {
         _charController = GetComponent<CharacterController>();
         audioNetwork = GetComponent<AudioNetwork>();
-
-        LocalPlayerController = _charController;
         transform.parent = GameObject.FindWithTag("Room").transform;
     }
+
 
     public override void OnStartLocalPlayer()
     {
@@ -46,8 +43,12 @@ public class FPSInput : NetworkBehaviour
             Camera.main.enabled = false;
         }
 
-        LocalPlayer = gameObject;
+        gameObject.name = "LocalPlayer";
     }
+
+    // public static GameObject GetLocalPlayer()
+    // {
+    // }
  
 
     // Update is called once per frame
@@ -97,7 +98,7 @@ public class FPSInput : NetworkBehaviour
         }
     }
 
-    public void addItem(ItemCollider item)
+    public void addItem(ItemInteract item)
     {
         itemToInteractWith = item;
         itemToInteractWith.transform.position =  transform.position;
