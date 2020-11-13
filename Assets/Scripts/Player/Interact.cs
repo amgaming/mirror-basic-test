@@ -8,16 +8,15 @@ public class Interact : NetworkBehaviour
 {
 
     private float currentInteractionTimeElapsed = 0f;
-    private ItemInteract itemFound;
+    private Interactable itemFound;
     private GameObject interactionUI;
     private Image progressImage;
-    public bool itemActive;
+    private bool isEnabled = true;
 
     void Start()
     {
         interactionUI = GameObject.Find("InteractionUI");
         progressImage = GameObject.Find("InteractionProgressImage").GetComponent<Image>();
-        itemActive = false;
     }
 
     private void Update()
@@ -28,12 +27,10 @@ public class Interact : NetworkBehaviour
             return;
         }
 
-        if (HasItem() || itemActive)
+        if (HasItem() && isEnabled)
         {
-            if (!itemActive)
-            {
-                interactionUI.SetActive(true);
-            }
+            
+            interactionUI.SetActive(true);
 
             if (Input.GetKey(KeyCode.E))
             {
@@ -62,19 +59,9 @@ public class Interact : NetworkBehaviour
     private void IncrementInteractionTime()
     {
         currentInteractionTimeElapsed += Time.deltaTime;
-        if (currentInteractionTimeElapsed >= itemFound.GetInteractionTime())
+        if (currentInteractionTimeElapsed >= itemFound.GetPickupTime())
         {
-            if (itemActive)
-            {
-                itemActive = false;
-                itemFound.ReleaseItem();
-                SetItem(null);
-            }
-            else
-            {
-                itemActive = true;
-                itemFound.Interact();
-            }
+            itemFound.Pickup();
             currentInteractionTimeElapsed = 0f;
         }
     }
@@ -83,18 +70,19 @@ public class Interact : NetworkBehaviour
     {
         if (HasItem())
         {
-            float percentage = currentInteractionTimeElapsed / itemFound.GetInteractionTime();
+            float percentage = currentInteractionTimeElapsed / itemFound.GetPickupTime();
             progressImage.fillAmount = percentage;
         }
     }
 
-    public void SetItem(ItemInteract item)
+    public void SetItem(Interactable item)
     {
-        if (itemActive)
-        {
-            return;
-        }
         itemFound = item;
+    }
+
+    public void Enable(bool enabled)
+    {
+        isEnabled = enabled;
     }
 
 }

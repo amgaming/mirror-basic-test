@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 // using Mirror;
 
-public class Item : MonoBehaviour
+public class Trap : MonoBehaviour
 {
 
     private bool isTrapped = false;
@@ -26,19 +26,6 @@ public class Item : MonoBehaviour
         return localPlayer;
     }
 
-    //  public override void OnStartLocalPlayer()
-    // {
-    //     base.OnStartLocalPlayer();
-
-    //     GameObject playerGameObject = GameObject.FindWithTag("Player");
-    //     player = playerGameObject.GetComponent<FPSInput>();
-
-    // }
-    void Start()
-    {
-        gameObject.transform.parent.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -55,31 +42,11 @@ public class Item : MonoBehaviour
 
         if (currentIntervalElapsed >= trappedInterval)
         {
-            setCharged(false);
-
             enablePlayerMovement(true);
-
-            Interact interact = GetLocalPlayer().GetComponent<Interact>();
-
-            if (interact != null)
-            {
-                interact.SetItem(gameObject.transform.parent.GetComponent<ItemInteract>());
-            }
-
             currentIntervalElapsed = 0f;
         }
     }
 
-    public void setCharged(bool state)
-    {
-        if (state) {
-            gameObject.transform.parent.GetComponent<Renderer>().material.SetColor("_Color", new Color(0.5f, 0.5f, 0.1f, 0.8f));
-        }
-        else {
-            gameObject.transform.parent.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-        }
-        isCharged = state;
-    }
 
     void enablePlayerMovement(bool state)
     {
@@ -89,6 +56,7 @@ public class Item : MonoBehaviour
         if (playerGameObject != null)
         {
             playerGameObject.GetComponent<FPSInput>().enableMovement(state);
+            playerGameObject.GetComponent<Interact>().Enable(state);
             isTrapped = !state;
         }
     }
@@ -97,21 +65,15 @@ public class Item : MonoBehaviour
     {
 
         Debug.Log("OnTriggerEnter BOX COLLIDER " + col.name);
+
         if(col.name != "LocalPlayer"){
             return;
         }
 
-        if(!isCharged) {
-            return;
-        }
         
-        Interact interact = GetLocalPlayer().GetComponent<Interact>();
-
-        if (interact != null)
-        {
-            interact.SetItem(null);
-        }
+        // Stop Player Movement
         enablePlayerMovement(false);
+        // Run animation 
 
     }
 }

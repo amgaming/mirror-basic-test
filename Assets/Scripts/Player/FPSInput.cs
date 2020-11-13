@@ -15,8 +15,6 @@ public class FPSInput : NetworkBehaviour
     private AudioNetwork audioNetwork;
     private bool isPlayerSprinting;
     private bool isPlayerMovementEnabled = true;
-    private ItemInteract itemToInteractWith;
-    
 
     private Camera camera;
 
@@ -98,24 +96,6 @@ public class FPSInput : NetworkBehaviour
         }
     }
 
-    public void addItem(ItemInteract item)
-    {
-        itemToInteractWith = item;
-        itemToInteractWith.transform.position =  transform.position;
-        itemToInteractWith.transform.parent = this.transform;
-        itemToInteractWith.transform.localPosition =  new Vector3(1f, 0.5f, 1f);
-        itemToInteractWith.GetComponentInChildren<Item>().transform.localPosition = Vector3.zero;
-        //itemToInteractWith.transform.position.y =  this.transform.rotation;
-        //itemToInteractWith.transform.localPosition =  Vector3.zero;
-        //itemToInteractWith.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-    }
-
-    public void releaseItem()
-    {
-        Debug.Log("releaseItem()");
-        itemToInteractWith.transform.localPosition =  new Vector3(1f, 0.5f, 4f);
-        itemToInteractWith.gameObject.transform.parent = GameObject.FindWithTag("Room").transform;
-    }
 
     public void enableMovement(bool state)
     {

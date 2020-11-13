@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 6120756600794734866}
   - component: {fileID: 5857028171435943863}
   - component: {fileID: 3586410113285045743}
-  - component: {fileID: 2923485664916755991}
+  - component: {fileID: 5016050199347317945}
   m_Layer: 0
   m_Name: Trap_02
   m_TagString: Untagged
@@ -220,7 +220,7 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
---- !u!114 &2923485664916755991
+--- !u!114 &5016050199347317945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,9 +229,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6120756600794734865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd1cec5bd916344a894e868ae4d4ae7, type: 3}
+  m_Script: {fileID: 11500000, guid: eb2efb251e6347d4c8260959f0b8fb3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  interactionTime: 2
+  pickupTime: 2
+  description: Trap
