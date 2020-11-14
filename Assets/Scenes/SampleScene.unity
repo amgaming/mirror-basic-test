@@ -595,7 +595,7 @@ PrefabInstance:
     - target: {fileID: 6120756600794734865, guid: cd7debf9277955c4698659272830721e,
         type: 3}
       propertyPath: m_Name
-      value: Trap_02 (1)
+      value: trap_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd7debf9277955c4698659272830721e, type: 3}
@@ -2856,7 +2856,7 @@ PrefabInstance:
     - target: {fileID: 6120756600794734865, guid: cd7debf9277955c4698659272830721e,
         type: 3}
       propertyPath: m_Name
-      value: Trap_02 (2)
+      value: trap_02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd7debf9277955c4698659272830721e, type: 3}
@@ -3906,7 +3906,7 @@ PrefabInstance:
     - target: {fileID: 6120756600794734865, guid: cd7debf9277955c4698659272830721e,
         type: 3}
       propertyPath: m_Name
-      value: Trap_02
+      value: trap_03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd7debf9277955c4698659272830721e, type: 3}
