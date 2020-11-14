@@ -34,7 +34,7 @@ public class Inventory : NetworkBehaviour
     public void SetItem(Interactable item)
     {
         itemToInteractWith = item;
-        itemToInteractWith.SetActive(false);
+        CmdServerPickItem(item.name);
     }
 
     public bool HasItem()
@@ -49,12 +49,45 @@ public class Inventory : NetworkBehaviour
             return;
         }
 
-        itemToInteractWith.SetActive(true);
-        itemToInteractWith.transform.position =  transform.position;
-        itemToInteractWith.transform.parent = transform;
-        itemToInteractWith.transform.localPosition =  new Vector3(1f, 0.5f, 4f);
-        itemToInteractWith.gameObject.transform.parent = GameObject.FindWithTag("Room").transform;
+        CmdServerDropItem(itemToInteractWith.name);
         itemToInteractWith = null;
+    }
+
+    [Command]
+    void CmdServerPickItem(string itemName){
+        RpcSendPickItemToClients(itemName);
+    }
+
+    [ClientRpc]
+    void RpcSendPickItemToClients(string itemName){
+        
+        GameObject item = GameObject.Find(itemName);
+
+        if(item)
+        {
+            item.SetActive(false);
+        }
+    }
+
+    [Command]
+    void CmdServerDropItem(string itemName){
+        RpcSendDropItemToClients(itemName);
+    }
+
+    [ClientRpc]
+    void RpcSendDropItemToClients(string itemName){
+
+        GameObject room = GameObject.FindWithTag("Room");
+        GameObject item = room.transform.Find(itemName).gameObject;
+
+        if(item)
+        {
+            item.SetActive(true);
+            item.transform.position = transform.position;
+            item.transform.parent = transform;
+            item.transform.localPosition = new Vector3(1f, 0.5f, 4f);
+            item.gameObject.transform.parent = room.transform;
+        }
     }
 
 
