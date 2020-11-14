@@ -13,8 +13,10 @@ public class Interact : NetworkBehaviour
     private Image progressImage;
     private bool isEnabled = true;
 
-    void Start()
+     public override void OnStartLocalPlayer()
     {
+        base.OnStartLocalPlayer();
+
         interactionUI = GameObject.Find("InteractionUI");
         progressImage = GameObject.Find("InteractionProgressImage").GetComponent<Image>();
     }

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(BoxCollider))]
-public class Interactable : MonoBehaviour
+public class Interactable : NetworkBehaviour
 {
     public float pickupTime = 2f;
     public string description = "";
