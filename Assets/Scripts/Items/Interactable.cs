@@ -21,7 +21,7 @@ public class Interactable : NetworkBehaviour
     protected GameObject GetLocalPlayer()
     {
 
-        if(localPlayer != null)
+        if (localPlayer != null)
         {
             return localPlayer;
         }
@@ -33,14 +33,14 @@ public class Interactable : NetworkBehaviour
 
     void Start()
     {
-        inventoryUI = GameObject.Find("InventoryUI");
-        descriptionUI = inventoryUI.GetComponentInChildren<Text>();
+        /* inventoryUI = GameObject.Find("InventoryUI");
+        descriptionUI = inventoryUI.GetComponentInChildren<Text>(); */
     }
 
     void Update()
     {
 
-        if(GetLocalPlayer() == null){
+        /* if(GetLocalPlayer() == null){
             return;
         }
         
@@ -51,14 +51,15 @@ public class Interactable : NetworkBehaviour
         else
         {
             inventoryUI.SetActive(false);
-        }
+        } */
     }
 
     private void OnTriggerEnter(Collider col)
     {
         Debug.Log("OnTriggerEnter SPHERE COLLIDER " + col.name);
-        
-        if(col.name != localPlayerTag){
+
+        if (col.name != localPlayerTag)
+        {
             return;
         }
 
@@ -69,8 +70,9 @@ public class Interactable : NetworkBehaviour
     {
 
         Debug.Log("OnTriggerExit SPHERE COLLIDER " + col.name);
-        
-        if(col.name != localPlayerTag){
+
+        if (col.name != localPlayerTag)
+        {
             return;
         }
 
@@ -79,14 +81,14 @@ public class Interactable : NetworkBehaviour
 
     private void SetItem(bool item)
     {
-        if(item == false) 
+        if (item == false)
         {
             GetLocalPlayer().GetComponent<Interact>().SetItem(null);
         }
         else
         {
             GetLocalPlayer().GetComponent<Interact>().SetItem(this);
-            
+
         }
     }
 
@@ -117,13 +119,15 @@ public class Interactable : NetworkBehaviour
         Drop();
     }
 
-    public float GetPickupTime(){
+    public float GetPickupTime()
+    {
         return pickupTime;
     }
 
-    public void SetActive(bool active){
+    public void SetActive(bool active)
+    {
         gameObject.SetActive(active);
     }
 
-    
+
 }
