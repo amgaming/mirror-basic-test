@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -14,6 +15,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Cursor.visible = true;
         movementSpeed = 2.50f;
         transform.position += (
             transform.right * Input.GetAxis("Horizontal")
@@ -21,6 +23,8 @@ public class CameraController : MonoBehaviour
             + transform.up * Input.GetAxis("Vertical"));
         if (Input.GetKey(KeyCode.LeftShift))
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             transform.RotateAround(
                 Vector3.zero,
                 new Vector3(-Input.GetAxis("Mouse Y"),
@@ -28,6 +32,10 @@ public class CameraController : MonoBehaviour
                     Input.GetAxis("Mouse X")),
                 50.0f * Time.deltaTime
             );
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            Cursor.lockState = CursorLockMode.None;
         }
 
     }
