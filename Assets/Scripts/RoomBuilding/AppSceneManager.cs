@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour
+public class AppSceneManager : MonoBehaviour
 {
     public GameObject[] rooms;
+    public Camera _camera;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,7 @@ public class SceneManager : MonoBehaviour
         GameObject room = rooms[roomId];
         Instantiate(room);
         room.transform.position = Vector3.zero;
+        _camera.GetComponent<CameraController>().room = room;
 
     }
 

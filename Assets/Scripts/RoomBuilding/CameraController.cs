@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public GameObject room;
     private static float movementSpeed = 1.0f;
+    private Camera _camera;
+    List<Transform> trapPositions = new List<Transform>();
     // Start is called before the first frame update
     void Start()
     {
+        _camera = GetComponent<Camera>();
 
     }
 
@@ -37,6 +42,35 @@ public class CameraController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            SetTrampPoint();
+        }
 
+    }
+    void SetTrampPoint()
+    {
+        Vector2 inputCursor = Input.mousePosition;
+        Vector3 point = new Vector3(inputCursor.x, inputCursor.y, 0);
+        Ray ray = _camera.ScreenPointToRay(point);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject hitObject = hit.transform.gameObject;
+            TrapPossible target = hitObject.GetComponent<TrapPossible>();
+            if (target != null)
+            {
+                trapPositions.Add(hit.transform);
+            }
+        }
+        UserConf.setTrapPositions(trapPositions);
+        /* Debug.Log("trapPositions.ToArray().Length");
+        Debug.Log(UserConf.trapPositions.ToArray().Length);
+        Debug.Log("trapPositions");
+        trapPositions.ForEach(x => { Debug.Log(x); }); */
+        if (UserConf.trapPositions.ToArray().Length > 4)
+        {
+            SceneManager.LoadScene(room.name);
+        }
     }
 }

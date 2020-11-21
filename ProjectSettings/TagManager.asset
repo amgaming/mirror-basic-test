@@ -8,6 +8,7 @@ TagManager:
   - Room1
   - Room2
   - Room3
+  - Trap_001
   layers:
   - Default
   - TransparentFX

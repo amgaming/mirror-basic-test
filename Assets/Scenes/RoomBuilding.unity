@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96baf1033ef9444b6895cc4d7754e4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: 0}
 --- !u!1 &389686070
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +251,7 @@ MonoBehaviour:
   - {fileID: 939881275967400707, guid: aff452e9ba860498a856b37b1190ca70, type: 3}
   - {fileID: 3880833367794780619, guid: 7a47a791bfb4148dfa4fcfc0275fce64, type: 3}
   - {fileID: 1924890638779084175, guid: 20e689025fb134c5fa94fb9ef6bb1a22, type: 3}
+  _camera: {fileID: 307126034}
 --- !u!4 &389686072
 Transform:
   m_ObjectHideFlags: 0
