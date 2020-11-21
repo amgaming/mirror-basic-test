@@ -269,8 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  speed: 6
-  sprintSpeedFactor: 2.5
+  speed: 10
+  sprintSpeedFactor: 2
 --- !u!114 &8692536083014119724
 MonoBehaviour:
   m_ObjectHideFlags: 0
