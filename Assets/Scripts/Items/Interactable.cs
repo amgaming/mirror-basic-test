@@ -33,25 +33,30 @@ public class Interactable : NetworkBehaviour
 
     void Start()
     {
-        /* inventoryUI = GameObject.Find("InventoryUI");
-        descriptionUI = inventoryUI.GetComponentInChildren<Text>(); */
+        inventoryUI = GameObject.Find("InventoryUI");
+        if (inventoryUI)
+        {
+            descriptionUI = inventoryUI.GetComponentInChildren<Text>();
+
+        }
     }
 
     void Update()
     {
 
-        /* if(GetLocalPlayer() == null){
+        if (GetLocalPlayer() == null)
+        {
             return;
         }
-        
-        if(GetLocalPlayer().GetComponent<Inventory>().HasItem())
+
+        if (GetLocalPlayer().GetComponent<Inventory>().HasItem())
         {
             inventoryUI.SetActive(true);
         }
         else
         {
             inventoryUI.SetActive(false);
-        } */
+        }
     }
 
     private void OnTriggerEnter(Collider col)
