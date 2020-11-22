@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class UserConf : MonoBehaviour
 {
-    static public List<Transform> trapPositions;
+    static public List<Vector3> trapPositions;
     // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    static public void setTrapPositions(List<Transform> data)
+    static public void setTrapPositions(List<Vector3> data)
     {
         trapPositions = data;
     }

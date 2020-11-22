@@ -8,10 +8,9 @@ public class InitialRoomConf : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UserConf.trapPositions.ForEach(trapTransform =>
+        UserConf.trapPositions.ForEach(position =>
         {
-            GameObject p = Instantiate(Trap001, Vector3.zero, Quaternion.identity);
-            //p.transform.position = pos;
+            Instantiate(Trap001, position, Quaternion.identity, transform);
         });
     }
 

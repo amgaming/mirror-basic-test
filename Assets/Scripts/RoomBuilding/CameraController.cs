@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     public GameObject room;
     private static float movementSpeed = 1.0f;
     private Camera _camera;
-    List<Transform> trapPositions = new List<Transform>();
+    List<Vector3> trapPositions = new List<Vector3>();
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +60,7 @@ public class CameraController : MonoBehaviour
             TrapPossible target = hitObject.GetComponent<TrapPossible>();
             if (target != null)
             {
-                trapPositions.Add(hit.transform);
+                trapPositions.Add(hit.transform.position);
             }
         }
         UserConf.setTrapPositions(trapPositions);
