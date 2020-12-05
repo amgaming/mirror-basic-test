@@ -61,10 +61,10 @@ public class Trap : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider col)
+    public void _OnTriggerEnter(Collider col)
     {
 
-        Debug.Log("OnTriggerEnter BOX COLLIDER " + col.name);
+        Debug.Log("OnTriggerEnter BOX COLLIDER 2 " + col.name);
 
         if(col.name != "LocalPlayer"){
             return;

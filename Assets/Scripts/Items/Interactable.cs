@@ -11,6 +11,7 @@ public class Interactable : NetworkBehaviour
 {
     public float pickupTime = 2f;
     public string description = "";
+    private int countOnTriggerEnter = 0;
 
     private GameObject localPlayer;
     private GameObject inventoryUI;
@@ -61,20 +62,28 @@ public class Interactable : NetworkBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("OnTriggerEnter SPHERE COLLIDER " + col.name);
+
+        Debug.Log("OnTriggerEnter SPHERE COLLIDER 1 " + col.name);
 
         if (col.name != localPlayerTag)
         {
             return;
         }
 
+        Debug.Log("call countOnTriggerEnter++  ");
+
+
         SetItem(true);
+
+        if (countOnTriggerEnter > 1) {
+            GetComponent<Trap>()._OnTriggerEnter(col);
+        }
     }
 
     private void OnTriggerExit(Collider col)
     {
 
-        Debug.Log("OnTriggerExit SPHERE COLLIDER " + col.name);
+        Debug.Log("OnTriggerExit SPHERE COLLIDER 1 " + col.name);
 
         if (col.name != localPlayerTag)
         {
@@ -88,10 +97,12 @@ public class Interactable : NetworkBehaviour
     {
         if (item == false)
         {
+            countOnTriggerEnter--;
             GetLocalPlayer().GetComponent<Interact>().SetItem(null);
         }
         else
         {
+            countOnTriggerEnter++;
             GetLocalPlayer().GetComponent<Interact>().SetItem(this);
 
         }
