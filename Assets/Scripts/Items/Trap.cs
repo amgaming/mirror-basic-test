@@ -8,6 +8,7 @@ public class Trap : MonoBehaviour
 
     private bool isTrapped = false;
     private bool isCharged = false;
+    private bool isActive = true;
     // private FPSInput player;
     public float trappedInterval = 2f;
     private float currentIntervalElapsed = 0f;
@@ -29,6 +30,11 @@ public class Trap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isActive) {
+            GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        } else {
+            GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+        }
         if (isTrapped == true)
         {
             checkIsTrapped();
@@ -61,12 +67,19 @@ public class Trap : MonoBehaviour
         }
     }
 
+    public void setActive(bool val)
+    {
+
+        isActive = val;
+
+    }
+
     public void _OnTriggerEnter(Collider col)
     {
 
         Debug.Log("OnTriggerEnter BOX COLLIDER 2 " + col.name);
 
-        if(col.name != "LocalPlayer"){
+        if(!isActive || col.name != "LocalPlayer"){
             return;
         }
 

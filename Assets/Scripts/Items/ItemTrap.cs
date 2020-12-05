@@ -7,7 +7,7 @@ using Mirror;
 /* [RequireComponent(typeof(Rigidbody))] */
 /* [RequireComponent(typeof(SphereCollider))] */
 /* [RequireComponent(typeof(BoxCollider))] */
-public class Interactable : NetworkBehaviour
+public class ItemTrap : NetworkBehaviour
 {
     public float pickupTime = 2f;
     public string description = "";
@@ -73,7 +73,7 @@ public class Interactable : NetworkBehaviour
         Debug.Log("call countOnTriggerEnter++  ");
 
 
-        SetItem(true);
+        SetTrap(true);
 
         if (countOnTriggerEnter > 1 && GetComponent<Trap>()) {
             GetComponent<Trap>()._OnTriggerEnter(col);
@@ -90,34 +90,34 @@ public class Interactable : NetworkBehaviour
             return;
         }
 
-        SetItem(false);
+        SetTrap(false);
     }
 
-    private void SetItem(bool item)
+    private void SetTrap(bool item)
     {
         if (item == false)
         {
             countOnTriggerEnter--;
-            GetLocalPlayer().GetComponent<Interact>().SetItem(null);
+            GetLocalPlayer().GetComponent<Interact>().SetTrap(null);
         }
         else
         {
             countOnTriggerEnter++;
-            GetLocalPlayer().GetComponent<Interact>().SetItem(this);
+            GetLocalPlayer().GetComponent<Interact>().SetTrap(this);
 
         }
     }
 
-    public void Pickup()
+    public void Deactivate(int seconds)
     {
-        // Update local player interface
-        descriptionUI.text = description;
-        // Drop current inventory active item
-        Drop();
-        // Set new active inventory item 
-        GetLocalPlayer().GetComponent<Inventory>().SetItem(this);
-        // Not interacting with item anymore (it's on inventory now)
-        SetItem(false);
+        GetComponent<Trap>().setActive(false);
+        if (seconds > 0) {
+            StartCoroutine(activateAfterSeconds(seconds));
+        }
+    }
+    private IEnumerator activateAfterSeconds(int seconds) { 
+        yield return new WaitForSeconds(seconds);    
+        GetComponent<Trap>().setActive(true);  
     }
 
     public void Drop()
