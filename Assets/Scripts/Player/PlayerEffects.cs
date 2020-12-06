@@ -42,7 +42,7 @@ public class PlayerEffects : NetworkBehaviour
 
         playerEffects.isUnvulnerable = true;
 
-        playerEffects.descriptionUI.text = InteractableObject.description;
+        playerEffects.descriptionUI.text = "Invulnerable";
         
         IEnumerator deactivateAfterSeconds(int seconds) { 
             yield return new WaitForSeconds(seconds);    
