@@ -65,6 +65,14 @@ public class PlayerEffects : NetworkBehaviour
         }
     }
 
+    public static void FullHeath(Interactable InteractableObject)
+    {
+        PlayerEffects playerEffects = GameObject.Find("LocalPlayer").GetComponent<PlayerEffects>();
+        
+        playerEffects.progressImage.fillAmount = 1;
+
+    }
+
     public void Damage(float amount)
     {
 
