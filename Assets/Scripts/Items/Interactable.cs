@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,14 +12,13 @@ using Mirror;
 /* [RequireComponent(typeof(BoxCollider))] */
 public class Interactable : NetworkBehaviour
 {
-    public float pickupTime = 2f;
+    public float speedRotate = 200f;
     public string description = "";
-    private int countOnTriggerEnter = 0;
 
     private GameObject localPlayer;
-    private GameObject inventoryUI;
-    private Text descriptionUI;
     private string localPlayerTag = "LocalPlayer";
+    public string effectName;
+    public int effectTime = 0;
 
 
     protected GameObject GetLocalPlayer()
@@ -34,30 +36,23 @@ public class Interactable : NetworkBehaviour
 
     void Start()
     {
-        inventoryUI = GameObject.Find("InventoryUI");
-        if (inventoryUI)
-        {
-            descriptionUI = inventoryUI.GetComponentInChildren<Text>();
-
-        }
     }
 
     void Update()
     {
+        transform.Rotate (Vector3.up * speedRotate * Time.deltaTime, Space.World);
+    }
 
-        if (GetLocalPlayer() == null)
-        {
-            return;
-        }
-
-        if (GetLocalPlayer().GetComponent<Inventory>().HasItem())
-        {
-            inventoryUI.SetActive(true);
-        }
-        else
-        {
-            inventoryUI.SetActive(false);
-        }
+    public void Load()
+    {
+        Type calledType = typeof(PlayerEffects);
+        calledType.InvokeMember(
+                        effectName,
+                        BindingFlags.InvokeMethod | BindingFlags.Public | 
+                            BindingFlags.Static,
+                        null,
+                        null,
+                        new object[] { this });
     }
 
     private void OnTriggerEnter(Collider col)
@@ -70,79 +65,11 @@ public class Interactable : NetworkBehaviour
             return;
         }
 
-        Debug.Log("call countOnTriggerEnter++  ");
-
-
-        SetItem(true);
-
-        if (countOnTriggerEnter > 1 && GetComponent<Trap>()) {
-            GetComponent<Trap>()._OnTriggerEnter(col);
-        }
+        UseItem();
     }
-
-    private void OnTriggerExit(Collider col)
+    public void UseItem()
     {
-
-        Debug.Log("OnTriggerExit SPHERE COLLIDER 1 " + col.name);
-
-        if (col.name != localPlayerTag)
-        {
-            return;
-        }
-
-        SetItem(false);
-    }
-
-    private void SetItem(bool item)
-    {
-        if (item == false)
-        {
-            countOnTriggerEnter--;
-            GetLocalPlayer().GetComponent<Interact>().SetItem(null);
-        }
-        else
-        {
-            countOnTriggerEnter++;
-            GetLocalPlayer().GetComponent<Interact>().SetItem(this);
-
-        }
-    }
-
-    public void Pickup()
-    {
-        // Update local player interface
-        descriptionUI.text = description;
-        // Drop current inventory active item
-        Drop();
-        // Set new active inventory item 
         GetLocalPlayer().GetComponent<Inventory>().SetItem(this);
-        // Not interacting with item anymore (it's on inventory now)
-        SetItem(false);
-    }
-
-    public void Drop()
-    {
-        GetLocalPlayer().GetComponent<Inventory>().DropItem();
-    }
-
-    public void Enable()
-    {
-        Drop();
-    }
-
-    public void Disable()
-    {
-        Drop();
-    }
-
-    public float GetPickupTime()
-    {
-        return pickupTime;
-    }
-
-    public void SetActive(bool active)
-    {
-        gameObject.SetActive(active);
     }
 
 

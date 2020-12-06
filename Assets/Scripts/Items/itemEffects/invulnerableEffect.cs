@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBehavior : MonoBehaviour
+public class invulnerableEffect : MonoBehaviour
 {
-    public float speedRotate = 200f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +13,12 @@ public class ItemBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate (Vector3.up * speedRotate * Time.deltaTime, Space.World);
+        
+    }
+
+    // Update is called once per frame
+    public void load()
+    {
+        Debug.Log("Invulnerable effect ......");
     }
 }

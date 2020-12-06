@@ -14,7 +14,6 @@ public class ItemTrap : NetworkBehaviour
     private int countOnTriggerEnter = 0;
 
     private GameObject localPlayer;
-    private GameObject inventoryUI;
     private Text descriptionUI;
     private string localPlayerTag = "LocalPlayer";
 
@@ -34,12 +33,6 @@ public class ItemTrap : NetworkBehaviour
 
     void Start()
     {
-        inventoryUI = GameObject.Find("InventoryUI");
-        if (inventoryUI)
-        {
-            descriptionUI = inventoryUI.GetComponentInChildren<Text>();
-
-        }
     }
 
     void Update()
@@ -48,15 +41,6 @@ public class ItemTrap : NetworkBehaviour
         if (GetLocalPlayer() == null)
         {
             return;
-        }
-
-        if (GetLocalPlayer().GetComponent<Inventory>().HasItem())
-        {
-            inventoryUI.SetActive(true);
-        }
-        else
-        {
-            inventoryUI.SetActive(false);
         }
     }
 
@@ -118,21 +102,6 @@ public class ItemTrap : NetworkBehaviour
     private IEnumerator activateAfterSeconds(int seconds) { 
         yield return new WaitForSeconds(seconds);    
         GetComponent<Trap>().setActive(true);  
-    }
-
-    public void Drop()
-    {
-        GetLocalPlayer().GetComponent<Inventory>().DropItem();
-    }
-
-    public void Enable()
-    {
-        Drop();
-    }
-
-    public void Disable()
-    {
-        Drop();
     }
 
     public float GetPickupTime()

@@ -59,7 +59,7 @@ public class Trap : MonoBehaviour
 
         GameObject playerGameObject = GetLocalPlayer();
 
-        if (playerGameObject != null)
+        if (playerGameObject != null && !playerGameObject.GetComponent<PlayerEffects>().isUnvulnerable)
         {
             playerGameObject.GetComponent<FPSInput>().enableMovement(state);
             playerGameObject.GetComponent<Interact>().Enable(state);

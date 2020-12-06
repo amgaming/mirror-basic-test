@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 6120756600794734866}
   - component: {fileID: 5857028171435943863}
   - component: {fileID: 3586410113285045743}
-  - component: {fileID: 5016050199347317945}
   - component: {fileID: 7947501492923587406}
   - component: {fileID: 8061327383402598881}
   - component: {fileID: 277719161681066211}
@@ -164,22 +163,6 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
---- !u!114 &5016050199347317945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6120756600794734865}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb2efb251e6347d4c8260959f0b8fb3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  pickupTime: 2
-  description: Trap
 --- !u!135 &7947501492923587406
 SphereCollider:
   m_ObjectHideFlags: 0
