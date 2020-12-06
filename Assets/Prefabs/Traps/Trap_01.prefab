@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trappedInterval: 2
+  damage: 0.1
 --- !u!114 &277719161681066211
 MonoBehaviour:
   m_ObjectHideFlags: 0

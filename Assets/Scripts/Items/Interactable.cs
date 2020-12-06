@@ -58,8 +58,6 @@ public class Interactable : NetworkBehaviour
     private void OnTriggerEnter(Collider col)
     {
 
-        Debug.Log("OnTriggerEnter SPHERE COLLIDER 1 " + col.name);
-
         if (col.name != localPlayerTag)
         {
             return;

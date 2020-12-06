@@ -11,6 +11,7 @@ public class Trap : MonoBehaviour
     private bool isActive = true;
     // private FPSInput player;
     public float trappedInterval = 2f;
+    public float damage = 0.1f;
     private float currentIntervalElapsed = 0f;
     private GameObject localPlayer;
 
@@ -77,6 +78,8 @@ public class Trap : MonoBehaviour
     public void _OnTriggerEnter(Collider col)
     {
 
+        GameObject playerGameObject = GetLocalPlayer();
+
         Debug.Log("OnTriggerEnter BOX COLLIDER 2 " + col.name);
 
         if(!isActive || col.name != "LocalPlayer"){
@@ -86,6 +89,8 @@ public class Trap : MonoBehaviour
         
         // Stop Player Movement
         enablePlayerMovement(false);
+        
+        playerGameObject.GetComponent<PlayerEffects>().Damage(damage);
         // Run animation 
 
     }

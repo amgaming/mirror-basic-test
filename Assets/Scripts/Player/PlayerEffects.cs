@@ -15,6 +15,16 @@ public class PlayerEffects : NetworkBehaviour
     private GameObject localPlayer;
     private GameObject inventoryUI;
     private Text descriptionUI;
+    private GameObject userAttributesUI;
+    private Image progressImage;
+
+     public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+
+        userAttributesUI = GameObject.Find("UserAttributesUI");
+        progressImage = GameObject.Find("UserAttributesUIProgressImage").GetComponent<Image>();
+    }
 
     void Start()
     {
@@ -54,9 +64,20 @@ public class PlayerEffects : NetworkBehaviour
              playerEffects.StartCoroutine(deactivateAfterSeconds(InteractableObject.effectTime));
         }
     }
+
+    public void Damage(float amount)
+    {
+
+        if (progressImage.fillAmount > 0) {
+            progressImage.fillAmount = progressImage.fillAmount - amount;
+            if (progressImage.fillAmount < 0) {
+                progressImage.fillAmount = 0;
+            }
+
+        }
+    }
     public static void SumHealth(Interactable InteractableObject)
     {
-        Debug.Log("SumHealth effect ......");
     }
     /* public void Load(string methodName, Interactable InteractableObject)
     {
