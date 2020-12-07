@@ -13,17 +13,9 @@ using Mirror;
 public class ItemTrap : NetworkBehaviour
 {
     public float pickupTime = 2f;
-    public string description = "";
-
-    private GameObject localPlayer;
-    private Text descriptionUI;
-    private string localPlayerTag = "LocalPlayer";
     public bool isActive = true;
     public bool triggerCondition = false;
     public string effectName;
-    public int effectTime = 0;
-    public float damage = 0.1f;
-    private Collider currentCol;
     private object[] effectParams;
 
     void Start()

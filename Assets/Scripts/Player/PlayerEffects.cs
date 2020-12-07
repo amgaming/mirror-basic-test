@@ -83,7 +83,7 @@ public class PlayerEffects : NetworkBehaviour
         }
     }
 
-    public static void Freeze(Collider col, ItemTrap ItemTrapObject)
+    public static void Freeze(Collider col, ItemTrap ItemTrapObject, float damage, int effectTime)
     {
 
         GameObject playerGameObject = GameObject.Find("LocalPlayer");
@@ -92,8 +92,8 @@ public class PlayerEffects : NetworkBehaviour
         IEnumerator deactivateAfterSeconds(int seconds) { 
             yield return new WaitForSeconds(seconds);   
         
-        playerGameObject.GetComponent<FPSInput>().enableMovement(true);
-        playerGameObject.GetComponent<Interact>().Enable(true);
+            playerGameObject.GetComponent<FPSInput>().enableMovement(true);
+            playerGameObject.GetComponent<Interact>().Enable(true);
         }
 
         if(!ItemTrapObject.isActive || col.name != "LocalPlayer" || playerGameObject == null || playerGameObject.GetComponent<PlayerEffects>().isUnvulnerable){
@@ -102,10 +102,10 @@ public class PlayerEffects : NetworkBehaviour
         
         playerGameObject.GetComponent<FPSInput>().enableMovement(false);
         playerGameObject.GetComponent<Interact>().Enable(false);
-        playerEffects.Damage(ItemTrapObject.damage);
+        playerEffects.Damage(damage);
 
-        if (ItemTrapObject.effectTime > 0) {
-             playerEffects.StartCoroutine(deactivateAfterSeconds(ItemTrapObject.effectTime));
+        if (effectTime > 0) {
+             playerEffects.StartCoroutine(deactivateAfterSeconds(effectTime));
         }
 
     }

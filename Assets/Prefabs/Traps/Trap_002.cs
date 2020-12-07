@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
 
-public class Trap_001 : NetworkBehaviour
+public class Trap_002 : NetworkBehaviour
 {
     private ItemTrap itemTrap;
     private int countOnTriggerEnter = 0;

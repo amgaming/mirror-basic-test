@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3586410113285045743}
   - component: {fileID: 8061327383402598881}
   - component: {fileID: 277719161681066211}
+  - component: {fileID: 8220318907361277387}
   m_Layer: 0
   m_Name: Trap_02
   m_TagString: Trap_002
@@ -179,6 +180,23 @@ MonoBehaviour:
   pickupTime: 2
   description: 
   isActive: 1
+  triggerCondition: 0
   effectName: 
   effectTime: 0
   damage: 0.1
+--- !u!114 &8220318907361277387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6120756600794734865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d17767327e834c438a42da2d3ca775f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  damage: 0.3
+  effectTime: 3
