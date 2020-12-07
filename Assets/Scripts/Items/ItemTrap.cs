@@ -20,9 +20,11 @@ public class ItemTrap : NetworkBehaviour
     private Text descriptionUI;
     private string localPlayerTag = "LocalPlayer";
     public bool isActive = true;
+    public bool triggerCondition = false;
     public string effectName;
     public int effectTime = 0;
     public float damage = 0.1f;
+    private Collider currentCol;
 
 
     protected GameObject GetLocalPlayer()
@@ -44,12 +46,10 @@ public class ItemTrap : NetworkBehaviour
 
     public void setActive(bool val)
     {
-
         isActive = val;
-
     }
 
-    public void Trigger(Collider col)
+    public void Trigger()
     {
         Type calledType = typeof(PlayerEffects);
         calledType.InvokeMember(
@@ -58,7 +58,7 @@ public class ItemTrap : NetworkBehaviour
                             BindingFlags.Static,
                         null,
                         null,
-                        new object[] { col, this });
+                        new object[] { currentCol, this });
     }
 
     void Update()
@@ -68,12 +68,15 @@ public class ItemTrap : NetworkBehaviour
         } else {
             GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
         }
+        if (triggerCondition) {
+            Trigger();
+            triggerCondition = false;
+        }
     }
 
     private void OnTriggerEnter(Collider col)
     {
-
-        Debug.Log("OnTriggerEnter SPHERE COLLIDER 1 " + col.name);
+        currentCol = col;
 
         if (col.name != localPlayerTag)
         {
@@ -86,7 +89,7 @@ public class ItemTrap : NetworkBehaviour
         SetTrap(true);
 
         if (countOnTriggerEnter > 1) {
-            Trigger(col);
+            triggerCondition = true;
         }
     }
 

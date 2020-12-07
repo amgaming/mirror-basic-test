@@ -33,7 +33,6 @@ public class PlayerEffects : NetworkBehaviour
         if (inventoryUI)
         {
             descriptionUI = inventoryUI.GetComponentInChildren<Text>();
-
         }
     }
     
@@ -81,7 +80,6 @@ public class PlayerEffects : NetworkBehaviour
             if (progressImage.fillAmount < 0) {
                 progressImage.fillAmount = 0;
             }
-
         }
     }
 
