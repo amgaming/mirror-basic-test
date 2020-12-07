@@ -10,12 +10,13 @@ using Mirror;
 public class Trap_002 : NetworkBehaviour
 {
     private ItemTrap itemTrap;
-    private int countOnTriggerEnter = 0;
 
     private GameObject localPlayer;
     private string localPlayerTag = "LocalPlayer";
     public float damage = 0.1f;
     public int effectTime = 0;
+    [SerializeField] private GameObject fireballPrefab;
+    private GameObject _fireball;
 
 
     protected GameObject GetLocalPlayer()
@@ -40,10 +41,31 @@ public class Trap_002 : NetworkBehaviour
     void Update()
     {
         if (itemTrap.isActive) {
+            fire();
             GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         } else {
             GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
         }
+    }
+
+    void fire() {
+        Ray ray = new Ray(transform.position, transform.forward);  
+        RaycastHit hit;  
+        if (Physics.SphereCast(ray, 0.75f, out hit)) {
+            GameObject hitObject = hit.transform.gameObject;
+            if (hitObject.GetComponent<PlayerCharacter>()) {   
+                if (_fireball == null) {  
+                    _fireball = Instantiate(fireballPrefab) as GameObject; 
+                    _fireball.GetComponent<Fireball_001>().SetTrap(this);
+                    _fireball.transform.position = transform.TransformPoint(Vector3.forward * 6f); 
+                    _fireball.transform.rotation = transform.rotation;
+                }
+            }
+        } 
+    }
+
+    public void hit() {
+        Debug.Log(">>>>>>>>>>>>>> Player hit >>>>>>>>>>>>>>");
     }
 
     private void OnTriggerEnter(Collider col)
@@ -56,10 +78,6 @@ public class Trap_002 : NetworkBehaviour
         }
 
         SetTrap(true);
-
-        if (countOnTriggerEnter > 1) {
-            itemTrap.triggerCondition = true;
-        }
     }
 
     private void OnTriggerExit(Collider col)
@@ -79,12 +97,10 @@ public class Trap_002 : NetworkBehaviour
     {
         if (item == false)
         {
-            countOnTriggerEnter--;
             GetLocalPlayer().GetComponent<Interact>().SetTrap(null);
         }
         else
         {
-            countOnTriggerEnter++;
             GetLocalPlayer().GetComponent<Interact>().SetTrap(itemTrap);
 
         }
