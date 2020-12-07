@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 8061327383402598881}
   - component: {fileID: 277719161681066211}
   m_Layer: 0
-  m_Name: Trap_01
+  m_Name: Trap_02
   m_TagString: Trap_001
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6120756600794734865}
-  m_Mesh: {fileID: -2432090755550338912, guid: fa50ee0e53a6a9e4cb3eefbe351433a5, type: 3}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &3726150005650649076
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8469494145858465668, guid: fa50ee0e53a6a9e4cb3eefbe351433a5, type: 3}
+  - {fileID: 2100000, guid: 439a10ee8f8d14040be9003239449741, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6120756600794734865}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa7ef24f6b85cce429d6e4ea643ff891, type: 3}
   m_Name: 
@@ -205,7 +205,4 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   pickupTime: 2
-  description: Cepo
-  isActive: 1
-  effectName: Freeze
-  effectTime: 3
+  description: 

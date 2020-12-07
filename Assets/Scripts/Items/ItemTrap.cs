@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +19,10 @@ public class ItemTrap : NetworkBehaviour
     private GameObject localPlayer;
     private Text descriptionUI;
     private string localPlayerTag = "LocalPlayer";
+    public bool isActive = true;
+    public string effectName;
+    public int effectTime = 0;
+    public float damage = 0.1f;
 
 
     protected GameObject GetLocalPlayer()
@@ -35,12 +42,31 @@ public class ItemTrap : NetworkBehaviour
     {
     }
 
-    void Update()
+    public void setActive(bool val)
     {
 
-        if (GetLocalPlayer() == null)
-        {
-            return;
+        isActive = val;
+
+    }
+
+    public void Load(Collider col)
+    {
+        Type calledType = typeof(PlayerEffects);
+        calledType.InvokeMember(
+                        effectName,
+                        BindingFlags.InvokeMethod | BindingFlags.Public | 
+                            BindingFlags.Static,
+                        null,
+                        null,
+                        new object[] { col, this });
+    }
+
+    void Update()
+    {
+        if (isActive) {
+            GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        } else {
+            GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
         }
     }
 
@@ -59,8 +85,8 @@ public class ItemTrap : NetworkBehaviour
 
         SetTrap(true);
 
-        if (countOnTriggerEnter > 1 && GetComponent<Trap>()) {
-            GetComponent<Trap>()._OnTriggerEnter(col);
+        if (countOnTriggerEnter > 1) {
+            Load(col);
         }
     }
 
@@ -94,14 +120,14 @@ public class ItemTrap : NetworkBehaviour
 
     public void Deactivate(int seconds)
     {
-        GetComponent<Trap>().setActive(false);
+        setActive(false);
         if (seconds > 0) {
             StartCoroutine(activateAfterSeconds(seconds));
         }
     }
     private IEnumerator activateAfterSeconds(int seconds) { 
         yield return new WaitForSeconds(seconds);    
-        GetComponent<Trap>().setActive(true);  
+        setActive(true);  
     }
 
     public float GetPickupTime()
