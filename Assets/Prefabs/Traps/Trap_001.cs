@@ -48,12 +48,13 @@ public class Trap_001 : NetworkBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        itemTrap.setEffectParams(new object[] { col, itemTrap, damage, effectTime });
 
         if (col.name != "LocalPlayer")
         {
             return;
         }
+
+        itemTrap.setEffectParams(new object[] { col, itemTrap, damage, effectTime });
 
         SetTrap(true);
 
