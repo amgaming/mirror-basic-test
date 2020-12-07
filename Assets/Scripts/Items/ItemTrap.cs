@@ -49,7 +49,7 @@ public class ItemTrap : NetworkBehaviour
 
     }
 
-    public void Load(Collider col)
+    public void Trigger(Collider col)
     {
         Type calledType = typeof(PlayerEffects);
         calledType.InvokeMember(
@@ -86,7 +86,7 @@ public class ItemTrap : NetworkBehaviour
         SetTrap(true);
 
         if (countOnTriggerEnter > 1) {
-            Load(col);
+            Trigger(col);
         }
     }
 
