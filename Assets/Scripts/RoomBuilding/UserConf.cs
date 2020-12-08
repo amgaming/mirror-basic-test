@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UserConf : MonoBehaviour
 {
-    static public List<Vector3> trapPositions;
+    static public List<Vector3> trapPositions = new List<Vector3>();    
     // Start is called before the first frame update
     void Start()
     {

@@ -248,9 +248,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rooms:
-  - {fileID: 939881275967400707, guid: aff452e9ba860498a856b37b1190ca70, type: 3}
-  - {fileID: 3880833367794780619, guid: 7a47a791bfb4148dfa4fcfc0275fce64, type: 3}
-  - {fileID: 1924890638779084175, guid: 20e689025fb134c5fa94fb9ef6bb1a22, type: 3}
+  - {fileID: 4707119864156473446, guid: aff452e9ba860498a856b37b1190ca70, type: 3}
+  - {fileID: 6412060096951417235, guid: 7a47a791bfb4148dfa4fcfc0275fce64, type: 3}
+  - {fileID: 3085475664061536271, guid: 20e689025fb134c5fa94fb9ef6bb1a22, type: 3}
   _camera: {fileID: 307126034}
 --- !u!4 &389686072
 Transform:

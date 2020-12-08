@@ -9,6 +9,7 @@ public class Interact : NetworkBehaviour
 
     private float currentInteractionTimeElapsed = 0f;
     private Interactable itemFound;
+    private ItemTrap trapFound;
     private GameObject interactionUI;
     private Image progressImage;
     private bool isEnabled = true;
@@ -29,7 +30,7 @@ public class Interact : NetworkBehaviour
             return;
         }
 
-        if (HasItem() && isEnabled)
+        if (HasTrap() && isEnabled)
         {
             
             interactionUI.SetActive(true);
@@ -58,21 +59,26 @@ public class Interact : NetworkBehaviour
         return itemFound != null;
     }
 
+    private bool HasTrap()
+    {
+        return trapFound != null;
+    }
+
     private void IncrementInteractionTime()
     {
         currentInteractionTimeElapsed += Time.deltaTime;
-        if (currentInteractionTimeElapsed >= itemFound.GetPickupTime())
+        if (currentInteractionTimeElapsed >= trapFound.GetPickupTime())
         {
-            itemFound.Pickup();
+            trapFound.Deactivate(5);
             currentInteractionTimeElapsed = 0f;
         }
     }
 
     private void UpdateProgressImage()
     {
-        if (HasItem())
+        if (HasTrap())
         {
-            float percentage = currentInteractionTimeElapsed / itemFound.GetPickupTime();
+            float percentage = currentInteractionTimeElapsed / trapFound.GetPickupTime();
             progressImage.fillAmount = percentage;
         }
     }
@@ -80,6 +86,10 @@ public class Interact : NetworkBehaviour
     public void SetItem(Interactable item)
     {
         itemFound = item;
+    }
+    public void SetTrap(ItemTrap trap)
+    {
+        trapFound = trap;
     }
 
     public void Enable(bool enabled)

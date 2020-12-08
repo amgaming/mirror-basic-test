@@ -9,6 +9,7 @@ TagManager:
   - Room2
   - Room3
   - Trap_001
+  - Trap_002
   layers:
   - Default
   - TransparentFX
