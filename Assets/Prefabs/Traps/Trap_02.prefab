@@ -182,6 +182,7 @@ MonoBehaviour:
   triggerCondition: 0
   effectName: 
   price: 10
+  title: Disparador
   description: Dispositivo que dispara al jugador cuando es detectado
 --- !u!114 &8220318907361277387
 MonoBehaviour:

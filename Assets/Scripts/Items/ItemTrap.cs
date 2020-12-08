@@ -18,6 +18,7 @@ public class ItemTrap : NetworkBehaviour
     public string effectName;
     private object[] effectParams;
     public int price;
+    public string title;
     public string description;
 
     void Start()

@@ -210,6 +210,7 @@ MonoBehaviour:
   triggerCondition: 0
   effectName: Freeze
   price: 5
+  title: Cepo
   description: "Cepo que inhabilita el movimiento del jugador durante un tiempo dererminado
     y hace una cantidad de da\xF1o."
 --- !u!114 &4017706209684928832

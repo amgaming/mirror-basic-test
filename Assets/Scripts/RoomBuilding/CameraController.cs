@@ -29,6 +29,12 @@ public class CameraController : MonoBehaviour
 
     public void OnClick(GameObject itemObject) {
         currentItemObject = itemObject;
+        ItemTrap currentItemObjectTrap = itemObject.GetComponent<ItemTrap>();
+        GameObject.Find("TitleCurrentTrap").GetComponent<Text>().text=currentItemObjectTrap.title ;
+        GameObject.Find("MetaCurrentTrap").GetComponent<Text>().text="Points Cost: " + currentItemObjectTrap.price.ToString();
+        GameObject.Find("DescCurrentTrap").GetComponent<Text>().text=currentItemObjectTrap.description;
+        /* GameObject slot = GameObject.Find("Slot3");
+        slot.GetComponentInChildren<Text>().text=itemObject.GetComponent<ItemTrap>().title; */
     }
 
     // Update is called once per frame
