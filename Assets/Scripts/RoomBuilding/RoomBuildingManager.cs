@@ -106,8 +106,15 @@ public class RoomBuildingManager : MonoBehaviour
             {
                 ListItemInitRoom newItem = new ListItemInitRoom(hit.transform.position, currentItemObject);
                 UserConf.trapPositions.Add(newItem);
+                instatiateTraps(newItem);
             }
         }
+    }
+    private void instatiateTraps(ListItemInitRoom item) {
+        Instantiate(item.trap);
+        Vector3 position = item.position;
+        position.y += 10;
+        item.trap.transform.position = position;
     }
     void CheckState(){
         textPointsValue.text=(initPoints - GetComponent<UserConf>().getTrapPoints()).ToString();
