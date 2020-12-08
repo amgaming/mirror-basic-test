@@ -209,6 +209,9 @@ MonoBehaviour:
   isActive: 1
   triggerCondition: 0
   effectName: Freeze
+  price: 5
+  description: "Cepo que inhabilita el movimiento del jugador durante un tiempo dererminado
+    y hace una cantidad de da\xF1o."
 --- !u!114 &4017706209684928832
 MonoBehaviour:
   m_ObjectHideFlags: 0

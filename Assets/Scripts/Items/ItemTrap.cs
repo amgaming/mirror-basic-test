@@ -17,6 +17,8 @@ public class ItemTrap : NetworkBehaviour
     public bool triggerCondition = false;
     public string effectName;
     private object[] effectParams;
+    public int price;
+    public string description;
 
     void Start()
     {

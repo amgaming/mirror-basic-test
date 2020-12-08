@@ -181,6 +181,8 @@ MonoBehaviour:
   isActive: 1
   triggerCondition: 0
   effectName: 
+  price: 10
+  description: Dispositivo que dispara al jugador cuando es detectado
 --- !u!114 &8220318907361277387
 MonoBehaviour:
   m_ObjectHideFlags: 0

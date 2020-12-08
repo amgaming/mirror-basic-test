@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
     private Camera _camera;
     public int initPoints = 5;
     private Text textPointsValue;
+    private GameObject currentItemObject;
     private GameObject roomBuildingUI;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,10 @@ public class CameraController : MonoBehaviour
             textPointsValue.text=initPoints.ToString();
         }
 
+    }
+
+    public void OnClick(GameObject itemObject) {
+        currentItemObject = itemObject;
     }
 
     // Update is called once per frame
@@ -59,31 +64,22 @@ public class CameraController : MonoBehaviour
     }
     void SetTrampPoint()
     {
-        Debug.Log("Here 1");
         Vector2 inputCursor = Input.mousePosition;
         Vector3 point = new Vector3(inputCursor.x, inputCursor.y, 0);
         Ray ray = _camera.ScreenPointToRay(point);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-        Debug.Log("Here 2");
             GameObject hitObject = hit.transform.gameObject;
             TrapPossible target = hitObject.GetComponent<TrapPossible>();
             if (target != null)
             {
-                UserConf.trapPositions.Add(hit.transform.position);
+                ListItemInitRoom newItem = new ListItemInitRoom(hit.transform.position, currentItemObject);
+                UserConf.trapPositions.Add(newItem);
             }
         }
-        //int newVal = initPoints - UserConf.trapPositions.ToArray().Length;
-        textPointsValue.text=(initPoints - UserConf.trapPositions.ToArray().Length).ToString();
-        Debug.Log("Here 3");
-        Debug.Log(UserConf.trapPositions.ToArray().Length);
-        /* Debug.Log("trapPositions.ToArray().Length");
-        Debug.Log(UserConf.trapPositions.ToArray().Length);
-        Debug.Log("trapPositions");
-        trapPositions.ForEach(x => { Debug.Log(x); }); */
-        //textPointsValue.text=initPoints.ToString();
-        if (UserConf.trapPositions.ToArray().Length > initPoints-1)
+        textPointsValue.text=(initPoints - GetComponent<UserConf>().getTrapPoints()).ToString();
+        if (GetComponent<UserConf>().getTrapPoints() == initPoints)
         {
             SceneManager.LoadScene(room.name);
         }
