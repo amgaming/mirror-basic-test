@@ -10,7 +10,7 @@ public class InitialRoomConf : MonoBehaviour
     {
         UserConf.trapPositions.ForEach(position =>
         {
-            Instantiate(Trap001, position, Quaternion.identity, transform);
+            Instantiate(Trap001, new Vector3(position.x, -4, position.z), Quaternion.identity, transform);
         });
     }
 
