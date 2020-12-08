@@ -15,6 +15,7 @@ public class RoomBuildingManager : MonoBehaviour
     private Text textPointsValue;
     private GameObject currentItemObject;
     private GameObject roomBuildingUI;
+    private GameObject readyButton;
     void Start()
     {
         initUI();
@@ -29,6 +30,9 @@ public class RoomBuildingManager : MonoBehaviour
     }
 
     private void initUI() {
+
+        readyButton = GameObject.Find("ReadyButton");
+        readyButton.SetActive(false);
         roomBuildingUI = GameObject.Find("RoomBuildingUI");
         if (roomBuildingUI)
         {
@@ -116,11 +120,15 @@ public class RoomBuildingManager : MonoBehaviour
         position.y += 10;
         item.trap.transform.position = position;
     }
+
+    public void Ready() {
+        SceneManager.LoadScene(room.name);
+    }
     void CheckState(){
         textPointsValue.text=(initPoints - GetComponent<UserConf>().getTrapPoints()).ToString();
         if (GetComponent<UserConf>().getTrapPoints() == initPoints)
         {
-            SceneManager.LoadScene(room.name);
+            readyButton.SetActive(true);
         }
     }
 }
