@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject room;
+    public GameObject Trap001;
     private static float movementSpeed = 1.0f;
     private Camera _camera;
     List<Vector3> trapPositions = new List<Vector3>();
@@ -60,7 +60,9 @@ public class CameraController : MonoBehaviour
             TrapPossible target = hitObject.GetComponent<TrapPossible>();
             if (target != null)
             {
+                // Debug.Log("trapPositions " + hit.transform.position);
                 trapPositions.Add(hit.transform.position);
+                Instantiate(Trap001, new Vector3(hit.transform.position.x, -4, hit.transform.position.z), Quaternion.identity, AppSceneManager.room.transform);
             }
         }
         UserConf.setTrapPositions(trapPositions);
@@ -68,9 +70,6 @@ public class CameraController : MonoBehaviour
         Debug.Log(UserConf.trapPositions.ToArray().Length);
         Debug.Log("trapPositions");
         trapPositions.ForEach(x => { Debug.Log(x); }); */
-        if (UserConf.trapPositions.ToArray().Length > 4)
-        {
-            SceneManager.LoadScene(room.name);
-        }
+        
     }
 }
