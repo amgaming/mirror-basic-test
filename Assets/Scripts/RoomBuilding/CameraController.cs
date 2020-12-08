@@ -3,17 +3,26 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
     public GameObject room;
     private static float movementSpeed = 1.0f;
     private Camera _camera;
-    List<Vector3> trapPositions = new List<Vector3>();
+    public int initPoints = 5;
+    private Text textPointsValue;
+    private GameObject roomBuildingUI;
     // Start is called before the first frame update
     void Start()
     {
         _camera = GetComponent<Camera>();
+        roomBuildingUI = GameObject.Find("RoomBuildingUI");
+        if (roomBuildingUI)
+        {
+            textPointsValue = roomBuildingUI.GetComponentInChildren<Text>();
+            textPointsValue.text=initPoints.ToString();
+        }
 
     }
 
@@ -50,25 +59,31 @@ public class CameraController : MonoBehaviour
     }
     void SetTrampPoint()
     {
+        Debug.Log("Here 1");
         Vector2 inputCursor = Input.mousePosition;
         Vector3 point = new Vector3(inputCursor.x, inputCursor.y, 0);
         Ray ray = _camera.ScreenPointToRay(point);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
+        Debug.Log("Here 2");
             GameObject hitObject = hit.transform.gameObject;
             TrapPossible target = hitObject.GetComponent<TrapPossible>();
             if (target != null)
             {
-                trapPositions.Add(hit.transform.position);
+                UserConf.trapPositions.Add(hit.transform.position);
             }
         }
-        UserConf.setTrapPositions(trapPositions);
+        //int newVal = initPoints - UserConf.trapPositions.ToArray().Length;
+        textPointsValue.text=(initPoints - UserConf.trapPositions.ToArray().Length).ToString();
+        Debug.Log("Here 3");
+        Debug.Log(UserConf.trapPositions.ToArray().Length);
         /* Debug.Log("trapPositions.ToArray().Length");
         Debug.Log(UserConf.trapPositions.ToArray().Length);
         Debug.Log("trapPositions");
         trapPositions.ForEach(x => { Debug.Log(x); }); */
-        if (UserConf.trapPositions.ToArray().Length > 4)
+        //textPointsValue.text=initPoints.ToString();
+        if (UserConf.trapPositions.ToArray().Length > initPoints-1)
         {
             SceneManager.LoadScene(room.name);
         }
