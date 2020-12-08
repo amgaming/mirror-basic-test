@@ -825,6 +825,11 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: aff452e9ba860498a856b37b1190ca70
       objectReference: {fileID: 0}
+    - target: {fileID: 2426817104502089935, guid: aff452e9ba860498a856b37b1190ca70,
+        type: 3}
+      propertyPath: sceneId
+      value: 1896112389
+      objectReference: {fileID: 0}
     - target: {fileID: 4707119864156473444, guid: aff452e9ba860498a856b37b1190ca70,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -890,6 +895,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room1
       objectReference: {fileID: 0}
+    - target: {fileID: 5050279647349852190, guid: aff452e9ba860498a856b37b1190ca70,
+        type: 3}
+      propertyPath: sceneId
+      value: 417255211
+      objectReference: {fileID: 0}
+    - target: {fileID: 5409067512574748738, guid: aff452e9ba860498a856b37b1190ca70,
+        type: 3}
+      propertyPath: sceneId
+      value: 3517610646
+      objectReference: {fileID: 0}
     - target: {fileID: 5501197082998731777, guid: aff452e9ba860498a856b37b1190ca70,
         type: 3}
       propertyPath: sceneId
@@ -919,6 +934,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AssetId
       value: aff452e9ba860498a856b37b1190ca70
+      objectReference: {fileID: 0}
+    - target: {fileID: 7518416880975484676, guid: aff452e9ba860498a856b37b1190ca70,
+        type: 3}
+      propertyPath: sceneId
+      value: 4216483766
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680909279491321612, guid: aff452e9ba860498a856b37b1190ca70,
+        type: 3}
+      propertyPath: sceneId
+      value: 2458704962
+      objectReference: {fileID: 0}
+    - target: {fileID: 7689038012628040057, guid: aff452e9ba860498a856b37b1190ca70,
+        type: 3}
+      propertyPath: sceneId
+      value: 373047923
+      objectReference: {fileID: 0}
+    - target: {fileID: 8723746420200146685, guid: aff452e9ba860498a856b37b1190ca70,
+        type: 3}
+      propertyPath: sceneId
+      value: 1154981068
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aff452e9ba860498a856b37b1190ca70, type: 3}
