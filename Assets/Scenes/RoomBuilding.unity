@@ -198,9 +198,6 @@ GameObject:
   - component: {fileID: 307126035}
   - component: {fileID: 307126034}
   - component: {fileID: 307126033}
-  - component: {fileID: 307126036}
-  - component: {fileID: 307126037}
-  - component: {fileID: 307126038}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -273,44 +270,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &307126036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307126032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96baf1033ef9444b6895cc4d7754e4eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  room: {fileID: 0}
-  initPoints: 20
---- !u!114 &307126037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307126032}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc1996d5af55c46c985d74ee209d4a46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &307126038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307126032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eb707f7889004ea287f613690be2820, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &389686070
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +281,7 @@ GameObject:
   - component: {fileID: 389686072}
   - component: {fileID: 389686071}
   m_Layer: 0
-  m_Name: SceneCrtl
+  m_Name: RoomBuildingCrtl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,14 +296,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 389686070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1710b09a9f94a4c8b6f890c0a0ffff, type: 3}
+  m_Script: {fileID: 11500000, guid: 186e9cf60f8a4414693da588e399ed86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rooms:
   - {fileID: 4707119864156473446, guid: aff452e9ba860498a856b37b1190ca70, type: 3}
   - {fileID: 6412060096951417235, guid: 7a47a791bfb4148dfa4fcfc0275fce64, type: 3}
   - {fileID: 3085475664061536271, guid: 20e689025fb134c5fa94fb9ef6bb1a22, type: 3}
+  room: {fileID: 0}
   _camera: {fileID: 307126034}
+  initPoints: 40
 --- !u!4 &389686072
 Transform:
   m_ObjectHideFlags: 0
@@ -694,7 +655,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307126036}
+      - m_Target: {fileID: 389686071}
         m_MethodName: OnClick
         m_Mode: 2
         m_Arguments:
@@ -1532,7 +1493,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307126036}
+      - m_Target: {fileID: 389686071}
         m_MethodName: OnClick
         m_Mode: 2
         m_Arguments:
