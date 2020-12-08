@@ -17,36 +17,58 @@ public class RoomBuildingManager : MonoBehaviour
     private GameObject roomBuildingUI;
     void Start()
     {
-        
-        //_camera = GetComponent<Camera>();
+        initUI();
+        pickRoom();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        CameraManage();
+        PutTrap();
+    }
+
+    private void initUI() {
         roomBuildingUI = GameObject.Find("RoomBuildingUI");
         if (roomBuildingUI)
         {
             textPointsValue = roomBuildingUI.GetComponentInChildren<Text>();
             textPointsValue.text=initPoints.ToString();
         }
+    }
 
-    
+    private void pickRoom() {
         int roomId = Random.Range(0, rooms.Length);
         room = rooms[roomId];
         Instantiate(room);
         room.transform.position = Vector3.zero;
-
     }
 
-    public void OnClick(GameObject itemObject) {
+    public void OnTrapSelection(GameObject itemObject) {
         currentItemObject = itemObject;
-        ItemTrap currentItemObjectTrap = itemObject.GetComponent<ItemTrap>();
-        GameObject.Find("TitleCurrentTrap").GetComponent<Text>().text=currentItemObjectTrap.title ;
-        GameObject.Find("MetaCurrentTrap").GetComponent<Text>().text="Points Cost: " + currentItemObjectTrap.price.ToString();
-        GameObject.Find("DescCurrentTrap").GetComponent<Text>().text=currentItemObjectTrap.description;
-        /* GameObject slot = GameObject.Find("Slot3");
-        slot.GetComponentInChildren<Text>().text=itemObject.GetComponent<ItemTrap>().title; */
+        SetUiPanelDesc();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void SetUiPanelDesc(){
+        ItemTrap currentItemObjectTrap = currentItemObject.GetComponent<ItemTrap>();
+        string title = currentItemObjectTrap.title;
+        string desc = currentItemObjectTrap.description;
+        string meta = "Points Cost: " + currentItemObjectTrap.price.ToString();
+
+        GameObject.Find("TitleCurrentTrap").GetComponent<Text>().text = title ;
+        GameObject.Find("DescCurrentTrap").GetComponent<Text>().text = desc;
+        GameObject.Find("MetaCurrentTrap").GetComponent<Text>().text = meta;
+    }
+
+    private void PutTrap() {
+        if (Input.GetMouseButtonDown(0))
+        {
+            SetTrampPoint();
+            CheckState();
+        }
+    }
+
+    private void CameraManage() {
         Cursor.visible = true;
         movementSpeed = 2.50f;
         _camera.transform.position += (
@@ -69,11 +91,6 @@ public class RoomBuildingManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
         }
-        if (Input.GetMouseButtonDown(0))
-        {
-            SetTrampPoint();
-        }
-
     }
     void SetTrampPoint()
     {
@@ -91,6 +108,8 @@ public class RoomBuildingManager : MonoBehaviour
                 UserConf.trapPositions.Add(newItem);
             }
         }
+    }
+    void CheckState(){
         textPointsValue.text=(initPoints - GetComponent<UserConf>().getTrapPoints()).ToString();
         if (GetComponent<UserConf>().getTrapPoints() == initPoints)
         {

@@ -280,6 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 389686072}
   - component: {fileID: 389686071}
+  - component: {fileID: 389686073}
   m_Layer: 0
   m_Name: RoomBuildingCrtl
   m_TagString: Untagged
@@ -320,6 +321,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &389686073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389686070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb707f7889004ea287f613690be2820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &403736297
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +669,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 389686071}
-        m_MethodName: OnClick
+        m_MethodName: OnTrapSelection
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6120756600794734865, guid: d8537f19fe3454e6bb1bab3c1c85af9f,
@@ -1494,7 +1507,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 389686071}
-        m_MethodName: OnClick
+        m_MethodName: OnTrapSelection
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6120756600794734865, guid: cd7debf9277955c4698659272830721e,
