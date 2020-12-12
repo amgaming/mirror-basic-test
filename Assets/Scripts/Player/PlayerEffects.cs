@@ -72,18 +72,21 @@ public class PlayerEffects : NetworkBehaviour
 
     }
 
-    public void Damage(float amount)
+    public static void Damage(float amount)
     {
 
-        if (progressImage.fillAmount > 0) {
-            progressImage.fillAmount = progressImage.fillAmount - amount;
-            if (progressImage.fillAmount < 0) {
-                progressImage.fillAmount = 0;
+        GameObject playerGameObject = GameObject.Find("LocalPlayer");
+        PlayerEffects playerEffects = playerGameObject.GetComponent<PlayerEffects>();
+
+        if (playerEffects.progressImage.fillAmount > 0) {
+            playerEffects.progressImage.fillAmount = playerEffects.progressImage.fillAmount - amount;
+            if (playerEffects.progressImage.fillAmount < 0) {
+                playerEffects.progressImage.fillAmount = 0;
             }
         }
     }
 
-    public static void Freeze(Collider col, ItemTrap ItemTrapObject, float damage, int effectTime)
+    public static void Freeze(ItemTrap ItemTrapObject, float damage, int effectTime)
     {
 
         GameObject playerGameObject = GameObject.Find("LocalPlayer");
@@ -96,13 +99,13 @@ public class PlayerEffects : NetworkBehaviour
             playerGameObject.GetComponent<Interact>().Enable(true);
         }
 
-        if(!ItemTrapObject.isActive || col.name != "LocalPlayer" || playerGameObject == null || playerGameObject.GetComponent<PlayerEffects>().isUnvulnerable){
+        if(!ItemTrapObject.isActive || playerGameObject == null || playerGameObject.GetComponent<PlayerEffects>().isUnvulnerable){
             return;
         }
         
         playerGameObject.GetComponent<FPSInput>().enableMovement(false);
         playerGameObject.GetComponent<Interact>().Enable(false);
-        playerEffects.Damage(damage);
+        PlayerEffects.Damage(damage);
 
         if (effectTime > 0) {
              playerEffects.StartCoroutine(deactivateAfterSeconds(effectTime));

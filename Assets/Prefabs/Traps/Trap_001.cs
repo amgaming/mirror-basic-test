@@ -34,6 +34,8 @@ public class Trap_001 : NetworkBehaviour
     void Start()
     {
         itemTrap = GetComponent<ItemTrap>();
+
+        itemTrap.setEffectParams(new object[] { itemTrap, damage, effectTime });
         
     }
 
@@ -53,8 +55,6 @@ public class Trap_001 : NetworkBehaviour
         {
             return;
         }
-
-        itemTrap.setEffectParams(new object[] { col, itemTrap, damage, effectTime });
 
         SetTrap(true);
 

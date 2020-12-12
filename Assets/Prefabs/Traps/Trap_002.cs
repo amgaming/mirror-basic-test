@@ -14,7 +14,6 @@ public class Trap_002 : NetworkBehaviour
     private GameObject localPlayer;
     private string localPlayerTag = "LocalPlayer";
     public float damage = 0.1f;
-    public int effectTime = 0;
     [SerializeField] private GameObject fireballPrefab;
     private GameObject _fireball;
 
@@ -35,6 +34,8 @@ public class Trap_002 : NetworkBehaviour
     void Start()
     {
         itemTrap = GetComponent<ItemTrap>();
+
+        itemTrap.setEffectParams(new object[] { damage });
         
     }
 
@@ -66,6 +67,7 @@ public class Trap_002 : NetworkBehaviour
 
     public void hit() {
         Debug.Log(">>>>>>>>>>>>>> Player hit >>>>>>>>>>>>>>");
+        itemTrap.triggerCondition = true;
     }
 
     private void OnTriggerEnter(Collider col)
@@ -75,8 +77,6 @@ public class Trap_002 : NetworkBehaviour
         {
             return;
         }
-
-        itemTrap.setEffectParams(new object[] { col, itemTrap, damage, effectTime });
 
         SetTrap(true);
     }

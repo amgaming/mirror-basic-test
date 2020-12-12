@@ -90,7 +90,7 @@ public class Trap : MonoBehaviour
         // Stop Player Movement
         enablePlayerMovement(false);
         
-        playerGameObject.GetComponent<PlayerEffects>().Damage(damage);
+        PlayerEffects.Damage(damage);
         // Run animation 
 
     }

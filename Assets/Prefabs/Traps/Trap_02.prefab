@@ -180,7 +180,7 @@ MonoBehaviour:
   pickupTime: 2
   isActive: 1
   triggerCondition: 0
-  effectName: 
+  effectName: Damage
   price: 10
   title: Disparador
   description: Dispositivo que dispara al jugador cuando es detectado
