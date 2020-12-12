@@ -108,17 +108,16 @@ public class RoomBuildingManager : MonoBehaviour
             TrapPossible target = hitObject.GetComponent<TrapPossible>();
             if (target != null)
             {
-                ListItemInitRoom newItem = new ListItemInitRoom(hit.transform.position, currentItemObject);
+                ListItemInitRoom newItem = new ListItemInitRoom(new Vector3(hit.point.x,hit.point.y,hit.point.z), hit.transform.rotation, currentItemObject);
                 UserConf.trapPositions.Add(newItem);
                 instatiateTraps(newItem);
             }
         }
     }
     private void instatiateTraps(ListItemInitRoom item) {
-        Instantiate(item.trap);
         Vector3 position = item.position;
-        position.y += 10;
-        item.trap.transform.position = position;
+        position.y += 2;
+        Instantiate(item.trap, position, item.rotation, GameObject.FindWithTag("Room").transform);
     }
 
     public void Ready() {

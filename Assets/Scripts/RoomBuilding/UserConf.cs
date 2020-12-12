@@ -6,10 +6,12 @@ public class ListItemInitRoom
 {
 
     public Vector3 position;   
+    public Quaternion rotation;   
     public GameObject trap;   
-    public ListItemInitRoom(Vector3 val1, GameObject val2) {
+    public ListItemInitRoom(Vector3 val1, Quaternion val2, GameObject val3) {
         position = val1;
-        trap = val2;
+        rotation = val2;
+        trap = val3;
     }
 }
 
