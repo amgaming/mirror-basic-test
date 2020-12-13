@@ -79,21 +79,31 @@ public class RoomBuildingManager : MonoBehaviour
             _camera.transform.right * Input.GetAxis("Horizontal")
             + _camera.transform.forward * Input.GetAxis("Mouse ScrollWheel") * 5.0f
             + _camera.transform.up * Input.GetAxis("Vertical"));
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            _camera.transform.RotateAround(
-                Vector3.zero,
-                new Vector3(-Input.GetAxis("Mouse Y"),
-                    0.0f,
-                    Input.GetAxis("Mouse X")),
-                50.0f * Time.deltaTime
-            );
+            float horizontal = Input.GetAxis("Mouse X") * 250.0f * Time.deltaTime;
+            float vertical = Input.GetAxis("Mouse Y") * 250.0f * Time.deltaTime;         
+            _camera.transform.RotateAround(Vector3.zero, _camera.transform.up, -horizontal);
+            _camera.transform.RotateAround(Vector3.zero, _camera.transform.right, vertical);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             Cursor.lockState = CursorLockMode.None;
+        }
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+
+            double valx = _camera.transform.rotation.x;
+            double valy = _camera.transform.rotation.y;
+            double valz = _camera.transform.rotation.z;
+            double valTotal = valx + valy + valz;
+            Debug.Log($"X: {valx}");
+            Debug.Log($"Y: {valy}");
+            Debug.Log($"Z: {valz}");
+            Debug.Log($"Total: {valTotal}-----------------------------------------------------");
         }
     }
     void SetTrampPoint()
