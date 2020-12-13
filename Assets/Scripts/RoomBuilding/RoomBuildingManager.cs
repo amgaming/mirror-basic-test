@@ -86,7 +86,7 @@ public class RoomBuildingManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             float horizontal = Input.GetAxis("Mouse X") * 250.0f * Time.deltaTime;
             float vertical = Input.GetAxis("Mouse Y") * 250.0f * Time.deltaTime;         
-            _camera.transform.RotateAround(Vector3.zero, _camera.transform.up, -horizontal);
+            _camera.transform.RotateAround(Vector3.zero, room.transform.up, horizontal);
             _camera.transform.RotateAround(Vector3.zero, _camera.transform.right, vertical);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
