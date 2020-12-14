@@ -11,6 +11,8 @@ public class RoomBuildingManager : MonoBehaviour
     public GameObject room;
     private static float movementSpeed = 1.0f;
     public Camera _camera;
+    public GameObject _cameraBody;
+    private CharacterController _charController;
     public int initPoints = 5;
     private Text textPointsValue;
     private GameObject currentItemObject;
@@ -31,6 +33,8 @@ public class RoomBuildingManager : MonoBehaviour
 
     private void initUI() {
 
+        _cameraBody = GameObject.Find("CameraBody");
+        _charController = _cameraBody.GetComponent<CharacterController>();
         readyButton = GameObject.Find("ReadyButton");
         readyButton.SetActive(false);
         roomBuildingUI = GameObject.Find("RoomBuildingUI");
@@ -74,11 +78,16 @@ public class RoomBuildingManager : MonoBehaviour
 
     private void CameraManage() {
         Cursor.visible = true;
-        movementSpeed = 2.50f;
-        _camera.transform.position += (
-            _camera.transform.right * Input.GetAxis("Horizontal")
-            + _camera.transform.forward * Input.GetAxis("Mouse ScrollWheel") * 5.0f
-            + _camera.transform.up * Input.GetAxis("Vertical"));
+        movementSpeed = 100.0f;
+
+        float deltaX = Input.GetAxis("Horizontal") * movementSpeed;
+        float deltaZ = Input.GetAxis("Vertical") * movementSpeed;
+        float deltay = Input.GetAxis("Mouse ScrollWheel") * movementSpeed * 50.0f;
+        
+        Vector3 translationMovement = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0) * new Vector3(deltaX, deltay, deltaZ);
+        translationMovement = Vector3.ClampMagnitude(translationMovement, movementSpeed);
+        translationMovement *= Time.deltaTime;
+        _charController.Move(translationMovement);
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -86,24 +95,12 @@ public class RoomBuildingManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             float horizontal = Input.GetAxis("Mouse X") * 250.0f * Time.deltaTime;
             float vertical = Input.GetAxis("Mouse Y") * 250.0f * Time.deltaTime;         
-            _camera.transform.RotateAround(Vector3.zero, room.transform.up, horizontal);
-            _camera.transform.RotateAround(Vector3.zero, _camera.transform.right, vertical);
+            _charController.transform.RotateAround(Vector3.zero, room.transform.up, horizontal);
+            _charController.transform.RotateAround(Vector3.zero, _charController.transform.right, vertical);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             Cursor.lockState = CursorLockMode.None;
-        }
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-
-            double valx = _camera.transform.rotation.x;
-            double valy = _camera.transform.rotation.y;
-            double valz = _camera.transform.rotation.z;
-            double valTotal = valx + valy + valz;
-            Debug.Log($"X: {valx}");
-            Debug.Log($"Y: {valy}");
-            Debug.Log($"Z: {valz}");
-            Debug.Log($"Total: {valTotal}-----------------------------------------------------");
         }
     }
     void SetTrampPoint()
