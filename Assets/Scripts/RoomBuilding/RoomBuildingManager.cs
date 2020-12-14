@@ -80,9 +80,9 @@ public class RoomBuildingManager : MonoBehaviour
         Cursor.visible = true;
         movementSpeed = 100.0f;
 
-        float deltaX = Input.GetAxis("Horizontal") * movementSpeed;
+        float deltaX = Input.GetAxis("Horizontal") * -movementSpeed;
         float deltaZ = Input.GetAxis("Vertical") * movementSpeed;
-        float deltay = Input.GetAxis("Mouse ScrollWheel") * movementSpeed * 50.0f;
+        float deltay = Input.GetAxis("Mouse ScrollWheel") * movementSpeed * 400.0f;
         
         Vector3 translationMovement = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0) * new Vector3(deltaX, deltay, deltaZ);
         translationMovement = Vector3.ClampMagnitude(translationMovement, movementSpeed);
