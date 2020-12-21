@@ -33,7 +33,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6120756600794734865}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8349168, y: -5.329775, z: -13.000246}
+  m_LocalPosition: {x: 0.61183214, y: 2.0474806, z: -29.553797}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -199,6 +199,5 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   damage: 0.3
-  effectTime: 3
   fireballPrefab: {fileID: 2908988462817199395, guid: 01eab724fc4e441a393f9b26f97b4009,
     type: 3}
