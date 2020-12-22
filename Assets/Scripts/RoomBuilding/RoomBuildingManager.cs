@@ -57,7 +57,7 @@ public class RoomBuildingManager : NetworkBehaviour
 
     private void initUI() {
 
-        _cameraBody = GameObject.FindWithTag("Player");
+        _cameraBody = gameObject;
         readyButton = GameObject.Find("ReadyButton");
         readyButton.SetActive(false);
         roomBuildingUI = GameObject.Find("RoomBuildingUI");
