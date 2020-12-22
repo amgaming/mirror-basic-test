@@ -76,9 +76,6 @@ public class RoomBuildingManager : NetworkBehaviour
     }
 
     public void OnTrapSelection(GameObject itemObject) {
-                Debug.Log("*************itemObject*************");
-                Debug.Log(itemObject);
-                Debug.Log("**************itemObject************");
         currentItemObject = itemObject;
         SetUiPanelDesc();
     }
@@ -143,9 +140,6 @@ public class RoomBuildingManager : NetworkBehaviour
             {
                 ListItemInitRoom newItem = new ListItemInitRoom(new Vector3(hit.point.x,hit.point.y,hit.point.z), hit.transform.rotation, currentItemObject);
                 UserConf.trapPositions.Add(newItem);
-                Debug.Log("*************currentItemObject*************");
-                Debug.Log(currentItemObject);
-                Debug.Log("**************currentItemObject************");
                 instatiateTraps(newItem);
             }
         }
