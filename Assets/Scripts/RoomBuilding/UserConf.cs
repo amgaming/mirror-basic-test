@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
 public class ListItemInitRoom 
 {
@@ -17,7 +16,7 @@ public class ListItemInitRoom
 }
 
 
-public class UserConf : NetworkBehaviour
+public class UserConf : MonoBehaviour
 {
     static public List<ListItemInitRoom> trapPositions = new List<ListItemInitRoom>();    
     // Start is called before the first frame update
