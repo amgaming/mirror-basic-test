@@ -1,24 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine;
-using UnityEngine.UI;
-using Mirror;
-
-
-public class PreloadRoomBuilding : MonoBehaviour
+ 
+public class PhysicsSceneLoader : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float physicsSceneTimeScale = 1;
+    private PhysicsScene physicsScene;
+ 
+    private void Start()
     {
-        SceneManager.LoadScene("RoomBuilding");
-        
+        //load the scene to place in a local physics scene.
+        LoadSceneParameters param = new LoadSceneParameters(LoadSceneMode.Additive, LocalPhysicsMode.Physics3D);
+        Scene scene = SceneManager.LoadScene("RoomBuilding", param);
+        //Get the scene's physics scene.
+        physicsScene = scene.GetPhysicsScene();
     }
-
-    // Update is called once per frame
-    void Update()
+     
+    private void FixedUpdate()
     {
-        
+        //Simulate the scene on FixedUpdate.
+        if (physicsScene != null)
+        {
+            physicsScene.Simulate(Time.fixedDeltaTime * physicsSceneTimeScale);
+        }
     }
 }
