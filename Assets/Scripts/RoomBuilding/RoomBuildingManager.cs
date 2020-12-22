@@ -52,6 +52,13 @@ public class RoomBuildingManager : NetworkBehaviour
         if (isLocalPlayer) {
             CameraManage();
             PutTrap();
+            
+            foreach (GameObject item in GameObject.FindGameObjectsWithTag("Room"))
+            {
+                Debug.Log("*************item***************");
+                Debug.Log(item.name);
+                Debug.Log("*************item***************");
+            }
         }
     }
 
@@ -71,6 +78,7 @@ public class RoomBuildingManager : NetworkBehaviour
     private void pickRoom() {
         int roomId = Random.Range(0, rooms.Length);
         room = rooms[roomId];
+        UserConf.setRoom(room);
         Instantiate(room);
         room.transform.position = Vector3.zero;
     }

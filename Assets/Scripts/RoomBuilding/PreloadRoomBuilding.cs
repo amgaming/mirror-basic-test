@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Text;
 using System;
  
-public class PhysicsSceneLoader : MonoBehaviour
+public class PreloadRoomBuilding : MonoBehaviour
 {
     public float physicsSceneTimeScale = 1;
     private PhysicsScene physicsScene;

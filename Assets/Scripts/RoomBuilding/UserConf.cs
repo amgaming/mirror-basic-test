@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ListItemInitRoom 
 {
@@ -19,6 +20,21 @@ public class ListItemInitRoom
 public class UserConf : MonoBehaviour
 {
     static public List<ListItemInitRoom> trapPositions = new List<ListItemInitRoom>();    
+    public string userId = getUserId(5);   
+    static public GameObject room;
+    public static string getUserId(int length)
+    {
+        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var stringChars = new char[8];
+        var random = new System.Random();
+
+        for (int i = 0; i < stringChars.Length; i++)
+        {
+            stringChars[i] = chars[random.Next(chars.Length)];
+        }
+
+        return new String(stringChars);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +44,11 @@ public class UserConf : MonoBehaviour
     static public void setTrapPositions(List<ListItemInitRoom> data)
     {
         trapPositions = data;
+    }
+
+    static public void setRoom(GameObject data)
+    {
+        room = data;
     }
 
     public int getTrapPoints() {
