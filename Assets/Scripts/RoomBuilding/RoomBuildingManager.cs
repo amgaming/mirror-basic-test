@@ -56,12 +56,12 @@ public class RoomBuildingManager : NetworkBehaviour
             foreach (GameObject item in GameObject.FindGameObjectsWithTag("Room"))
             {
                 Debug.Log("*************item***************");
-                Debug.Log(item.name);
+                Debug.Log(item.GetInstanceID());
                 Debug.Log("*************item***************");
             }
-                Debug.Log("*************UserConf.room.name***************");
-                Debug.Log(GetComponent<UserConf>().room.name);
-                Debug.Log("*************UserConf.room.name***************");
+                Debug.Log("*************UserConf.room.GetInstanceID***************");
+                Debug.Log(GetComponent<UserConf>().room.GetInstanceID());
+                Debug.Log("*************UserConf.room.GetInstanceID***************");
         }
     }
 
@@ -81,8 +81,7 @@ public class RoomBuildingManager : NetworkBehaviour
     private void pickRoom() {
         int roomId = Random.Range(0, rooms.Length);
         room = rooms[roomId];
-        GetComponent<UserConf>().setRoom(room);
-        Instantiate(room);
+        GetComponent<UserConf>().setRoom(Instantiate(room));
         room.transform.position = Vector3.zero;
     }
 
