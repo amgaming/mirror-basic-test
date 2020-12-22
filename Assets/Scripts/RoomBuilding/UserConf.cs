@@ -16,7 +16,7 @@ public class ListItemInitRoom
 }
 
 
-public class UserConf : MonoBehaviour
+public class UserConf : NetworkBehaviour
 {
     static public List<ListItemInitRoom> trapPositions = new List<ListItemInitRoom>();    
     // Start is called before the first frame update
