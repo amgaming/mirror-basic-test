@@ -223,7 +223,7 @@ MonoBehaviour:
   room: {fileID: 0}
   _camera: {fileID: 8436416121788764536}
   _cameraBody: {fileID: 0}
-  initPoints: 5
+  initPoints: 40
 --- !u!114 &1954658229049180595
 MonoBehaviour:
   m_ObjectHideFlags: 0
