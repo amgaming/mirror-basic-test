@@ -1,18 +1,34 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Text;
+using System;
  
 public class PhysicsSceneLoader : MonoBehaviour
 {
     public float physicsSceneTimeScale = 1;
     private PhysicsScene physicsScene;
- 
+    public static string getSceneName(int length)
+    {
+        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var stringChars = new char[8];
+        var random = new System.Random();
+
+        for (int i = 0; i < stringChars.Length; i++)
+        {
+            stringChars[i] = chars[random.Next(chars.Length)];
+        }
+
+        return new String(stringChars);
+    }
+
+    
     private void Start()
     {
-        //load the scene to place in a local physics scene.
-        LoadSceneParameters param = new LoadSceneParameters(LoadSceneMode.Additive, LocalPhysicsMode.Physics3D);
-        Scene scene = SceneManager.LoadScene("RoomBuilding", param);
-        //Get the scene's physics scene.
-        physicsScene = scene.GetPhysicsScene();
+        string sceneName = getSceneName(5);
+        Scene newScene = SceneManager.CreateScene(sceneName);
+        SceneManager.MergeScenes(SceneManager.GetSceneByName("RoomBuilding"), newScene);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        
     }
      
     private void FixedUpdate()
