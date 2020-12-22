@@ -59,6 +59,9 @@ public class RoomBuildingManager : NetworkBehaviour
                 Debug.Log(item.name);
                 Debug.Log("*************item***************");
             }
+                Debug.Log("*************UserConf.room.name***************");
+                Debug.Log(UserConf.room.name);
+                Debug.Log("*************UserConf.room.name***************");
         }
     }
 
