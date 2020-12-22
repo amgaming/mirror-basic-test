@@ -31,6 +31,13 @@ public class RoomBuildingManager : NetworkBehaviour
 
         // Turn off main camera because GamePlayer prefab has its own camera
         _camera = GetComponentInChildren<Camera>();
+        
+        _camera.enabled = true;
+
+        if (Camera.main)
+        {
+            Camera.main.enabled = false;
+        }
         initUI();
 
         gameObject.name = "LocalPlayer";
