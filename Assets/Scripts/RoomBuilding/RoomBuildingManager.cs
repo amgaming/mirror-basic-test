@@ -55,13 +55,16 @@ public class RoomBuildingManager : NetworkBehaviour
             
             foreach (GameObject item in GameObject.FindGameObjectsWithTag("Room"))
             {
-                Debug.Log("*************item***************");
+                /* Debug.Log("*************item***************");
                 Debug.Log(item.GetInstanceID());
-                Debug.Log("*************item***************");
+                Debug.Log("*************item***************"); */
+                if (item.GetInstanceID() != GetComponent<UserConf>().room.GetInstanceID()) {
+                    item.SetActive(false);
+                }
             }
-                Debug.Log("*************UserConf.room.GetInstanceID***************");
+               /*  Debug.Log("*************UserConf.room.GetInstanceID***************");
                 Debug.Log(GetComponent<UserConf>().room.GetInstanceID());
-                Debug.Log("*************UserConf.room.GetInstanceID***************");
+                Debug.Log("*************UserConf.room.GetInstanceID***************"); */
         }
     }
 
