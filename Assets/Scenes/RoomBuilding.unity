@@ -185,7 +185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &373265037
 GameObject:
@@ -305,74 +305,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &389686070
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 389686072}
-  - component: {fileID: 389686071}
-  - component: {fileID: 389686073}
-  m_Layer: 0
-  m_Name: RoomBuildingCrtl
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &389686071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389686070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 186e9cf60f8a4414693da588e399ed86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  rooms:
-  - {fileID: 4707119864156473446, guid: aff452e9ba860498a856b37b1190ca70, type: 3}
-  - {fileID: 6412060096951417235, guid: 7a47a791bfb4148dfa4fcfc0275fce64, type: 3}
-  - {fileID: 3085475664061536271, guid: 20e689025fb134c5fa94fb9ef6bb1a22, type: 3}
-  room: {fileID: 0}
-  _camera: {fileID: 0}
-  _cameraBody: {fileID: 0}
-  initPoints: 40
---- !u!4 &389686072
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389686070}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.054732323, y: 1.0476341, z: 10.146969}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &389686073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389686070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eb707f7889004ea287f613690be2820, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &403736297
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,7 +426,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 389686071}
+      - m_Target: {fileID: 0}
         m_MethodName: Ready
         m_Mode: 1
         m_Arguments:
@@ -839,7 +773,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 389686071}
+      - m_Target: {fileID: 0}
         m_MethodName: OnTrapSelection
         m_Mode: 2
         m_Arguments:
@@ -1111,7 +1045,7 @@ Transform:
   m_Children:
   - {fileID: 782264006}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1735910718
 GameObject:
@@ -1791,7 +1725,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 389686071}
+      - m_Target: {fileID: 0}
         m_MethodName: OnTrapSelection
         m_Mode: 2
         m_Arguments:

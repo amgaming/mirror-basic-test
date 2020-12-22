@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 8436416122428060942}
   - component: {fileID: 2807669132266722829}
   - component: {fileID: -2853295897886042124}
+  - component: {fileID: 7090616839680163142}
   m_Layer: 0
   m_Name: CameraBody
   m_TagString: Player
@@ -200,3 +201,25 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &7090616839680163142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8436416122428060937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186e9cf60f8a4414693da588e399ed86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  rooms:
+  - {fileID: 4707119864156473446, guid: aff452e9ba860498a856b37b1190ca70, type: 3}
+  - {fileID: 6412060096951417235, guid: 7a47a791bfb4148dfa4fcfc0275fce64, type: 3}
+  - {fileID: 3085475664061536271, guid: 20e689025fb134c5fa94fb9ef6bb1a22, type: 3}
+  room: {fileID: 0}
+  _camera: {fileID: 8436416121788764536}
+  _cameraBody: {fileID: 0}
+  initPoints: 5

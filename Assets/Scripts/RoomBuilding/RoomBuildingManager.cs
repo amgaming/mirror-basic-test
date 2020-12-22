@@ -15,38 +15,42 @@ public class RoomBuildingManager : NetworkBehaviour
     public GameObject _cameraBody;
     private CharacterController _charController;
     public int initPoints = 5;
-    private bool initialized = false;
     private Text textPointsValue;
     private GameObject currentItemObject;
     private GameObject roomBuildingUI;
     private GameObject readyButton;
     void Start()
     {
+        _charController = GetComponent<CharacterController>();
+    }
+
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+
+        // Turn off main camera because GamePlayer prefab has its own camera
+        _camera = GetComponentInChildren<Camera>();
+        initUI();
+
+        gameObject.name = "LocalPlayer";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindWithTag("Player")) {
-            if (!initialized) {
-                Init();
-            }
+        if (!room) {  
+            pickRoom();
+        }
+        if (isLocalPlayer) {
             CameraManage();
             PutTrap();
         }
-    }
-    void Init()
-    {
-        initUI();
-        pickRoom();
-        initialized = true;
     }
 
     private void initUI() {
 
         _cameraBody = GameObject.FindWithTag("Player");
-        _camera = Camera.main;
-        _charController = _cameraBody.GetComponent<CharacterController>();
         readyButton = GameObject.Find("ReadyButton");
         readyButton.SetActive(false);
         roomBuildingUI = GameObject.Find("RoomBuildingUI");
