@@ -4,8 +4,9 @@ using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
-public class RoomBuildingManager : MonoBehaviour
+public class RoomBuildingManager : NetworkBehaviour
 {
     public GameObject[] rooms;
     public GameObject room;
@@ -14,26 +15,37 @@ public class RoomBuildingManager : MonoBehaviour
     public GameObject _cameraBody;
     private CharacterController _charController;
     public int initPoints = 5;
+    private bool initialized = false;
     private Text textPointsValue;
     private GameObject currentItemObject;
     private GameObject roomBuildingUI;
     private GameObject readyButton;
     void Start()
     {
-        initUI();
-        pickRoom();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CameraManage();
-        PutTrap();
+        if (GameObject.FindWithTag("Player")) {
+            if (!initialized) {
+                Init();
+            }
+            CameraManage();
+            PutTrap();
+        }
+    }
+    void Init()
+    {
+        initUI();
+        pickRoom();
+        initialized = true;
     }
 
     private void initUI() {
 
-        _cameraBody = GameObject.Find("CameraBody");
+        _cameraBody = GameObject.FindWithTag("Player");
+        _camera = Camera.main;
         _charController = _cameraBody.GetComponent<CharacterController>();
         readyButton = GameObject.Find("ReadyButton");
         readyButton.SetActive(false);
