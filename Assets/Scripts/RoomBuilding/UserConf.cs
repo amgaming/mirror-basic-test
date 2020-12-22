@@ -21,7 +21,7 @@ public class UserConf : MonoBehaviour
 {
     static public List<ListItemInitRoom> trapPositions = new List<ListItemInitRoom>();    
     public string userId = getUserId(5);   
-    static public GameObject room;
+    public GameObject room;
     public static string getUserId(int length)
     {
         var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -46,7 +46,7 @@ public class UserConf : MonoBehaviour
         trapPositions = data;
     }
 
-    static public void setRoom(GameObject data)
+    public void setRoom(GameObject data)
     {
         room = data;
     }

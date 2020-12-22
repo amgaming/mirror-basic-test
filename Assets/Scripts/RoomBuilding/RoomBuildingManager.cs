@@ -60,7 +60,7 @@ public class RoomBuildingManager : NetworkBehaviour
                 Debug.Log("*************item***************");
             }
                 Debug.Log("*************UserConf.room.name***************");
-                Debug.Log(UserConf.room.name);
+                Debug.Log(GetComponent<UserConf>().room.name);
                 Debug.Log("*************UserConf.room.name***************");
         }
     }
@@ -81,7 +81,7 @@ public class RoomBuildingManager : NetworkBehaviour
     private void pickRoom() {
         int roomId = Random.Range(0, rooms.Length);
         room = rooms[roomId];
-        UserConf.setRoom(room);
+        GetComponent<UserConf>().setRoom(room);
         Instantiate(room);
         room.transform.position = Vector3.zero;
     }
