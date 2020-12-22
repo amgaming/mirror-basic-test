@@ -21,13 +21,13 @@ public class RoomBuildingManager : NetworkBehaviour
     private GameObject readyButton;
     void Start()
     {
-        _charController = GetComponent<CharacterController>();
     }
 
 
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
+        _charController = GetComponent<CharacterController>();
 
         // Turn off main camera because GamePlayer prefab has its own camera
         _camera = GetComponentInChildren<Camera>();
