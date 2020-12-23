@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
+using UnityEditor;
 
 public class RoomBuildingManager : NetworkBehaviour
 {
@@ -83,8 +84,8 @@ public class RoomBuildingManager : NetworkBehaviour
 
     private void pickRoom() {
         int roomId = Random.Range(0, rooms.Length);
-        room = rooms[roomId];
-        GetComponent<UserConf>().setRoom(Instantiate(room));
+        room = rooms[2];
+        GetComponent<UserConf>().setRoom(Instantiate(room), room.name);
         room.transform.position = Vector3.zero;
     }
 
@@ -164,7 +165,10 @@ public class RoomBuildingManager : NetworkBehaviour
     }
 
     public void Ready() {
-        SceneManager.LoadScene(room.name);
+        //SceneManager.LoadScene(GetComponent<UserConf>().room.name);
+        Debug.Log(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
+        //SceneManager.LoadScene(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
+        NetworkManager.singleton.ServerChangeScene(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
     }
     void CheckState(){
         textPointsValue.text=(initPoints - GetComponent<UserConf>().getTrapPoints()).ToString();
