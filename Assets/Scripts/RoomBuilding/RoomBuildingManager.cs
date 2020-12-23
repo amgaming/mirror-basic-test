@@ -168,7 +168,7 @@ public class RoomBuildingManager : NetworkBehaviour
         //SceneManager.LoadScene(GetComponent<UserConf>().room.name);
         Debug.Log(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
         //SceneManager.LoadScene(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
-        NetworkManager.singleton.ServerChangeScene(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
+        //NetworkManager.singleton.ServerChangeScene(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
     }
     void CheckState(){
         textPointsValue.text=(initPoints - GetComponent<UserConf>().getTrapPoints()).ToString();
