@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/* public class ListItemInitRoom 
+public class ListItemInitRoom 
 {
 
     public Vector3 position;   
@@ -13,10 +13,10 @@ using UnityEngine;
         rotation = val2;
         trap = val3;
     }
-} */
+}
 
 
-public class UserConf : MonoBehaviour
+public class GamePlayerMng : MonoBehaviour
 {
     static public List<ListItemInitRoom> trapPositions = new List<ListItemInitRoom>();    
     // Start is called before the first frame update
