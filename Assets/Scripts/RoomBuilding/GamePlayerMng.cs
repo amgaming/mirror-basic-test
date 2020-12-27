@@ -19,6 +19,22 @@ public class ListItemInitRoom
 public class GamePlayerMng : MonoBehaviour
 {
     static public List<ListItemInitRoom> trapPositions = new List<ListItemInitRoom>();    
+    public string userId = getUserId(5);   
+    public GameObject room;
+    public string roomName;
+    public static string getUserId(int length)
+    {
+        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var stringChars = new char[8];
+        var random = new System.Random();
+
+        for (int i = 0; i < stringChars.Length; i++)
+        {
+            stringChars[i] = chars[random.Next(chars.Length)];
+        }
+
+        return new String(stringChars);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +44,12 @@ public class GamePlayerMng : MonoBehaviour
     static public void setTrapPositions(List<ListItemInitRoom> data)
     {
         trapPositions = data;
+    }
+
+    public void setRoom(GameObject data, string data2)
+    {
+        room = data;
+        roomName = data2;
     }
 
     public int getTrapPoints() {
