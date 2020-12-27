@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: -2853295897886042124}
   - component: {fileID: 7090616839680163142}
   - component: {fileID: 1954658229049180595}
+  - component: {fileID: 2718312500715972403}
   m_Layer: 0
   m_Name: CameraBody
   m_TagString: Player
@@ -236,3 +237,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb707f7889004ea287f613690be2820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userId: ufBfOEuK
+  room: {fileID: 0}
+  roomName: 
+--- !u!114 &2718312500715972403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8436416122428060937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnClientConnected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClientDataReceived:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClientError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClientDisconnected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnServerConnected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnServerDataReceived:
+    m_PersistentCalls:
+      m_Calls: []
+  OnServerError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnServerDisconnected:
+    m_PersistentCalls:
+      m_Calls: []
+  port: 7777
+  NoDelay: 1
+  serverMaxMessageSize: 16384
+  serverMaxReceivesPerTick: 10000
+  clientMaxMessageSize: 16384
+  clientMaxReceivesPerTick: 1000

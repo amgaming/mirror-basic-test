@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
@@ -20,6 +21,8 @@ public class PlayerCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("aqui ---------------------");
+        Debug.Log(SceneManager.GetActiveScene().name);
+        Debug.Log("aqui ---------------------");
     }
 }

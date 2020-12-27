@@ -270,8 +270,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 373265041}
-  - component: {fileID: 373265040}
   - component: {fileID: 373265039}
+  - component: {fileID: 373265040}
   - component: {fileID: 373265038}
   m_Layer: 0
   m_Name: NetworkManager
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 373265037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Script: {fileID: 11500000, guid: 16ba00ac7f0324dd48e14f8b63555c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
@@ -355,9 +355,9 @@ MonoBehaviour:
   showDebugMessages: 0
   serverTickRate: 30
   offlineScene: 
-  onlineScene: Assets/Scenes/RoomBuilding.unity
+  onlineScene: 
   transport: {fileID: 373265039}
-  networkAddress: 192.168.1.148
+  networkAddress: localhost
   maxConnections: 4
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60

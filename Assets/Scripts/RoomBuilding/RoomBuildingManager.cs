@@ -27,6 +27,9 @@ public class RoomBuildingManager : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
+        if (SceneManager.GetActiveScene().name != "RoomBuilding") {
+            return;
+        }
         base.OnStartLocalPlayer();
         _charController = GetComponent<CharacterController>();
 
@@ -47,6 +50,9 @@ public class RoomBuildingManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene().name != "RoomBuilding") {
+            return;
+        }
         if (!room) {  
             pickRoom();
         }
@@ -114,6 +120,9 @@ public class RoomBuildingManager : NetworkBehaviour
     }
 
     private void CameraManage() {
+        if (!_charController) {
+            return;
+        }
         Cursor.visible = true;
         movementSpeed = 100.0f;
 
@@ -168,7 +177,7 @@ public class RoomBuildingManager : NetworkBehaviour
         //SceneManager.LoadScene(GetComponent<UserConf>().room.name);
         Debug.Log(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
         //SceneManager.LoadScene(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
-        //NetworkManager.singleton.ServerChangeScene(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
+        NetworkManager.singleton.ServerChangeScene(GameObject.Find("LocalPlayer").GetComponent<UserConf>().roomName);
     }
     void CheckState(){
         textPointsValue.text=(initPoints - GetComponent<UserConf>().getTrapPoints()).ToString();
