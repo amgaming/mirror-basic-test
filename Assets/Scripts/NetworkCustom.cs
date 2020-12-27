@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Mirror;
+using UnityEngine.UI;
+using System;
 
 public class NetworkCustom : NetworkManager
 {
@@ -12,5 +14,8 @@ public class NetworkCustom : NetworkManager
         Debug.Log("OnClientConnect Called");
  
         base.OnClientConnect(conn);
+
+        GamePlayerMng.users.Add(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
+        GameObject.Find("UsersListTextData").GetComponentInChildren<Text>().text = GamePlayerMng.users.Count.ToString();
     }
 }
