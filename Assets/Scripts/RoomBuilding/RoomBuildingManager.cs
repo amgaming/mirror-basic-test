@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class RoomBuildingManager : MonoBehaviour
 {
@@ -18,10 +19,24 @@ public class RoomBuildingManager : MonoBehaviour
     private GameObject currentItemObject;
     private GameObject roomBuildingUI;
     private GameObject readyButton;
+    public string userId = getUserId(5);   
     void Start()
     {
         initUI();
         pickRoom();
+    }
+    public static string getUserId(int length)
+    {
+        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var stringChars = new char[8];
+        var random = new System.Random();
+
+        for (int i = 0; i < stringChars.Length; i++)
+        {
+            stringChars[i] = chars[random.Next(chars.Length)];
+        }
+
+        return new String(stringChars);
     }
 
     // Update is called once per frame
@@ -32,11 +47,11 @@ public class RoomBuildingManager : MonoBehaviour
     }
 
     private void initUI() {
-
+        GameObject.Find("UserIdUiBlock").GetComponentInChildren<Text>().text=userId;
         _cameraBody = GameObject.Find("CameraBody");
         _charController = _cameraBody.GetComponent<CharacterController>();
         readyButton = GameObject.Find("ReadyButton");
-        readyButton.SetActive(false);
+        //readyButton.SetActive(false);
         roomBuildingUI = GameObject.Find("RoomBuildingUI");
         if (roomBuildingUI)
         {
@@ -46,7 +61,7 @@ public class RoomBuildingManager : MonoBehaviour
     }
 
     private void pickRoom() {
-        int roomId = Random.Range(0, rooms.Length);
+        int roomId = UnityEngine.Random.Range(0, rooms.Length);
         room = rooms[roomId];
         Instantiate(room);
         room.transform.position = Vector3.zero;
@@ -127,8 +142,20 @@ public class RoomBuildingManager : MonoBehaviour
         Instantiate(item.trap, position, item.rotation, GameObject.FindWithTag("Room").transform);
     }
 
+    private void initUser() {
+        List<ListItemInitRoom>  trapPositions = UserConf.trapPositions;
+        string mapTitle = GameObject.Find("MapTitle").GetComponentsInChildren<Text>()[1].text;
+        string userName = GameObject.Find("UserName").GetComponentsInChildren<Text>()[1].text;
+        ListUser newUser = new ListUser(userId,trapPositions,room,mapTitle,userName);
+        GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().setUser(newUser);
+        //GamePlayerMng.setUser(newUser);
+        //GamePlayerMng.users.Add(newUser);
+        //roomBuildingUI.GetComponentInChildren<UserIdUiBlock>().GetComponentInChildren<Text>().text=userId;
+    }
+
     public void Ready() {
-        SceneManager.LoadScene(room.name);
+        initUser();
+        SceneManager.LoadScene("Login");
     }
     void CheckState(){
         textPointsValue.text=(initPoints - GetComponent<UserConf>().getTrapPoints()).ToString();

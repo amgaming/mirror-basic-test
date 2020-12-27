@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class ListItemInitRoom 
 {
@@ -16,30 +18,42 @@ public class ListItemInitRoom
 }
 
 
+public class ListUser 
+{
+    public string userId;   
+    public List<ListItemInitRoom>  trapPositions;   
+    public GameObject room;
+    public string mapTitle;   
+    public string userName;   
+    public ListUser(string val1, List<ListItemInitRoom> val2,GameObject val3,string val4,string val5) {
+        Debug.Log($"val1: {val1}, val2: {val2}, val3: {val3}, val4: {val4}, val5: {val5}, ");
+        userId = val1;
+        trapPositions = val2;
+        room = val3;
+        mapTitle = val4;
+        userName = val5;
+    }
+}
+
+
 public class GamePlayerMng : MonoBehaviour
 {
-    static public List<ListItemInitRoom> trapPositions = new List<ListItemInitRoom>();    
-    public string userId = getUserId(5);   
+    static public List<ListItemInitRoom> trapPositions = new List<ListItemInitRoom>();     
+    static public List<ListUser> users = new List<ListUser>();     
+    public ListUser user;
     public GameObject room;
     public string roomName;
-    public static string getUserId(int length)
-    {
-        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        var stringChars = new char[8];
-        var random = new System.Random();
-
-        for (int i = 0; i < stringChars.Length; i++)
-        {
-            stringChars[i] = chars[random.Next(chars.Length)];
-        }
-
-        return new String(stringChars);
-    }
     // Start is called before the first frame update
     void Start()
     {
 
     }
+
+    void Awake() 
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
+
 
     static public void setTrapPositions(List<ListItemInitRoom> data)
     {
@@ -50,6 +64,16 @@ public class GamePlayerMng : MonoBehaviour
     {
         room = data;
         roomName = data2;
+    }
+
+    public void setUser(ListUser data)
+    {
+        user = data;
+    }
+
+    public ListUser getUser()
+    {
+        return user;
     }
 
     public int getTrapPoints() {
