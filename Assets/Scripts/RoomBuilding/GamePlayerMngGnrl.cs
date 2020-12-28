@@ -5,10 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using Mirror;
 
 
-public class GamePlayerMngGnrl : NetworkBehaviour
+public class GamePlayerMngGnrl : MonoBehaviour
 {   
      public List<ListUser> users = new List<ListUser>(); 
     // Start is called before the first frame update
@@ -17,6 +16,11 @@ public class GamePlayerMngGnrl : NetworkBehaviour
         /* if (!Convert.ToBoolean(users)) {
             users = new List<ListUser>();  
         } */
+
+        Debug.Log("-------------------------????????----------------------------");
+
+        GameObject PlayerInfo = (GameObject)Instantiate(Resources.Load("PlayerInfo"));
+        PlayerInfo.GetComponent<PlayerInfoData>().setUser(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
 
     }
 
