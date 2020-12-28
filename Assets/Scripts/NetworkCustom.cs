@@ -8,6 +8,13 @@ using System;
 
 public class NetworkCustom : NetworkManager
 {
+    List<GameObject> Players = new List<GameObject>();
+
+    // Update is called once per frame
+    void Update()
+    {
+        GameObject.Find("UsersListTextData").GetComponentInChildren<Text>().text = Players.Count.ToString();
+    }
     public override void OnClientConnect(NetworkConnection conn)
     {
      
@@ -16,10 +23,13 @@ public class NetworkCustom : NetworkManager
         base.OnClientConnect(conn);
 
         //GamePlayerMng.users.Add(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
-        GameObject gamePlayerMngGnrlObject = GameObject.Find("GamePlayerMngGnrlObject");
-        GamePlayerMngGnrl gamePlayerMngGnrl = gamePlayerMngGnrlObject.GetComponentInChildren<GamePlayerMngGnrl>();
+        GameObject PlayerInfo = (GameObject)Instantiate(Resources.Load("PlayerInfo"));
+        PlayerInfo.GetComponent<PlayerInfoData>().setUser(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
+        Players.Add(PlayerInfo);
+        /* GamePlayerMngGnrl gamePlayerMngGnrl = gamePlayerMngGnrlObject.GetComponentInChildren<GamePlayerMngGnrl>();
         List<ListUser> users = gamePlayerMngGnrl.users;
-        users.Add(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
-        GameObject.Find("UsersListTextData").GetComponentInChildren<Text>().text = users.Count.ToString();
+        users.Add(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser()); */
+        //GameObject.Find("UsersListTextData").GetComponentInChildren<Text>().text = users.Count.ToString();
+        //Instantiate(Resources.Load("PlayerInfo"))
     }
 }
