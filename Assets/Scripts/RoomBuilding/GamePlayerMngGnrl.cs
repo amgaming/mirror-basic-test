@@ -10,10 +10,13 @@ using Mirror;
 
 public class GamePlayerMngGnrl : NetworkBehaviour
 {   
-     public List<ListUser> users = new List<ListUser>();     
+     public List<ListUser> users;     
     // Start is called before the first frame update
     void Start()
     {
+        if (!Convert.ToBoolean(users)) {
+            users = new List<ListUser>();  
+        }
 
     }
 
