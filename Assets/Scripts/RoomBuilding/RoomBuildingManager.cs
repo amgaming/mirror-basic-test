@@ -19,21 +19,22 @@ public class RoomBuildingManager : MonoBehaviour
     private GameObject currentItemObject;
     private GameObject roomBuildingUI;
     private GameObject readyButton;
-    public string userId = getUserId(5);   
+    private string userId;   
     void Start()
     {
+        userId = getUserId(5);  
         initUI();
         pickRoom();
     }
     public static string getUserId(int length)
     {
         var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        var stringChars = new char[8];
+        var stringChars = new char[length];
         var random = new System.Random();
 
         for (int i = 0; i < stringChars.Length; i++)
         {
-            stringChars[i] = chars[random.Next(chars.Length)];
+            stringChars[i] = chars[random.Next(0, chars.Length)];
         }
 
         return new String(stringChars);
