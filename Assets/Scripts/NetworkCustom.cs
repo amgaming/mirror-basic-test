@@ -15,12 +15,12 @@ public class NetworkCustom : NetworkManager
     {
         GameObject.Find("UsersListTextData").GetComponentInChildren<Text>().text = Players.Count.ToString();
     }
-    public override void OnClientConnect(NetworkConnection conn)
+    public override void OnServerConnect(NetworkConnection conn)
     {
      
-        Debug.Log("OnClientConnect Called");
+        Debug.Log("OnServerConnect Called");
  
-        base.OnClientConnect(conn);
+        base.OnServerConnect(conn);
 
         //GamePlayerMng.users.Add(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
         GameObject PlayerInfo = (GameObject)Instantiate(Resources.Load("PlayerInfo"));
