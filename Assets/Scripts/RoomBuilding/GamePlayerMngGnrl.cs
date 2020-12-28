@@ -8,7 +8,7 @@ using System;
 using Mirror;
 
 
-public class GamePlayerMngGnrl : MonoBehaviour
+public class GamePlayerMngGnrl : NetworkBehaviour
 {   
      public List<ListUser> users = new List<ListUser>(); 
     // Start is called before the first frame update
