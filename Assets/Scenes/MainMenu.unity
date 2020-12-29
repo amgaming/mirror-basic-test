@@ -229,7 +229,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.4, y: 7}
+  m_AnchoredPosition: {x: 2.4000015, y: 7}
   m_SizeDelta: {x: 34.873444, y: 68.538216}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &47370104
@@ -5610,7 +5610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkManager: {fileID: 492306074}
-  landingPagePanel: {fileID: 579715784}
+  landingPagePanel: {fileID: 1933395328}
   ipAddressInputField: {fileID: 957983743}
   joinButton: {fileID: 767291954}
 --- !u!1 &492306073
@@ -6499,7 +6499,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 258
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -6600,8 +6600,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.800001, y: 49}
-  m_SizeDelta: {x: 311.24802, y: 54.829094}
+  m_AnchoredPosition: {x: 0.99999, y: 49}
+  m_SizeDelta: {x: 345.53574, y: 54.829094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &957983743
 MonoBehaviour:
@@ -12327,7 +12327,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283256144
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -12548,7 +12548,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: Enter IP address
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e54d4a10c7832d48b558031cc4be220, type: 2}
   m_sharedMaterial: {fileID: 496266940042627296, guid: 7e54d4a10c7832d48b558031cc4be220,
@@ -12618,13 +12618,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1848164769}
-    characterCount: 13
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0

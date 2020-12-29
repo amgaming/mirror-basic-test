@@ -123,6 +123,48 @@ public class NetworkLobbyManager : NetworkManager
         return true;
     }
 
+    public void StartGame()
+    {
+        if (IsOnMenuScene())
+        {
+            if (!IsReadyToStart()) { return; }
+
+            ServerChangeScene("RoomBuilding");
+        }
+    }
+
+    public override void ServerChangeScene(string newSceneName)
+    {
+        // From menu to game
+        if (IsOnMenuScene() && newSceneName.StartsWith("RoomBuilding"))
+        {
+            for (int i = RoomPlayers.Count - 1; i >= 0; i--)
+            {
+                var conn = RoomPlayers[i].connectionToClient;
+                // var gameplayerInstance = Instantiate(gamePlayerPrefab);
+                // gameplayerInstance.SetDisplayName(RoomPlayers[i].DisplayName);
+
+                // NetworkServer.Destroy(conn.identity.gameObject);
+
+                // NetworkServer.ReplacePlayerForConnection(conn, gameplayerInstance.gameObject);
+            }
+        }
+
+        base.ServerChangeScene(newSceneName);
+    }
+
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        // if (sceneName.StartsWith("Scene_Map"))
+        // {
+        //     GameObject playerSpawnSystemInstance = Instantiate(playerSpawnSystem);
+        //     NetworkServer.Spawn(playerSpawnSystemInstance);
+
+        //     GameObject roundSystemInstance = Instantiate(roundSystem);
+        //     NetworkServer.Spawn(roundSystemInstance);
+        // }
+    }
+
     public override void OnServerReady(NetworkConnection conn)
     {
         base.OnServerReady(conn);

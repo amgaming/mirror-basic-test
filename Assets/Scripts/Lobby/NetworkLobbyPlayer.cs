@@ -58,7 +58,7 @@ public class NetworkLobbyPlayer : NetworkBehaviour
 
     public void OnExitClick()
     {
-        if(!isLeader){
+        if(isLeader){
             Room.StopHost();
         }
         else
@@ -132,9 +132,9 @@ public class NetworkLobbyPlayer : NetworkBehaviour
 
         for (int i = 0; i < Room.RoomPlayers.Count; i++)
         {
-            if(!Room.RoomPlayers[i].hasAuthority)
+            if(!Room.RoomPlayers[i].hasAuthority && Room.RoomPlayers[i].IsReady)
             {
-                playerNameTexts[index].text = "<color=8CDAFF>" +Room.RoomPlayers[i].DisplayName + "</color> is ready";
+                playerNameTexts[index].text = Room.RoomPlayers[i].DisplayName + " is ready";
                 index++;
             }
         }
@@ -153,6 +153,14 @@ public class NetworkLobbyPlayer : NetworkBehaviour
     {
         IsReady = false;
         Room.NotifyPlayersOfReadyState();
+    }
+
+    [Command]
+    public void CmdStartGame()
+    {
+        if (Room.RoomPlayers[0].connectionToClient != connectionToClient) { return; }
+
+        Room.StartGame();
     }
 
 }

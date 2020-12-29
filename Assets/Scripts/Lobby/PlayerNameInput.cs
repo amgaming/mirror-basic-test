@@ -32,6 +32,7 @@ public class PlayerNameInput : MonoBehaviour
         nameInputField.text = defaultName;
 
         SetPlayerName(defaultName);
+        SavePlayerName();
     }
 
     public void SetPlayerName(string name)

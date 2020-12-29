@@ -15603,7 +15603,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 30
-  m_CharacterLimit: 20
+  m_CharacterLimit: 16
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
@@ -15783,7 +15783,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5874745544040164803}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5874745544040164826}
+        m_MethodName: CmdStartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5874745544040164748
 GameObject:
   m_ObjectHideFlags: 0
@@ -15884,7 +15895,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_textAlignment: 257
+  m_textAlignment: 258
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
