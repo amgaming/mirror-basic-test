@@ -13,10 +13,11 @@ public class SyncTest : NetworkBehaviour
 
     public override void OnStartAuthority() {
         base.OnStartAuthority();
-        Debug.Log("OnStartAuthority");
+        Debug.Log("OnStartAuthority --> SyncTest");
     }
     void Start()
     {
+        Debug.Log("Start()---> SyncTest");
 
         GameObject PlayerInfo = (GameObject)Instantiate(Resources.Load("PlayerInfo"));
         //NetworkServer.Spawn(PlayerInfo);
