@@ -18,12 +18,15 @@ public class SyncTest : NetworkBehaviour
     void Start()
     {
         Debug.Log("Start()---> SyncTest");
+        
+    }
+
+    public void AddUserData() {
 
         GameObject PlayerInfo = (GameObject)Instantiate(Resources.Load("PlayerInfo"));
         //NetworkServer.Spawn(PlayerInfo);
         PlayerInfo.GetComponent<PlayerInfoData>().setUser(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
         Players.Add(PlayerInfo);
-        
     }
 
     // Update is called once per frame

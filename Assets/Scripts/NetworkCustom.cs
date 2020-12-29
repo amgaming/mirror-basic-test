@@ -43,6 +43,7 @@ public class NetworkCustom : NetworkManager
         Debug.Log("OnClientConnect Called");
  
         base.OnClientConnect(conn);
+        GameObject.Find("SyncTestGameObject").GetComponent<SyncTest>().AddUserData();
 
         //GamePlayerMng.users.Add(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
         /* GameObject PlayerInfo = (GameObject)Instantiate(Resources.Load("PlayerInfo"));
