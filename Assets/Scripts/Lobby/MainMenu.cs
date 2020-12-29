@@ -6,15 +6,23 @@ public class MainMenu : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
-    
-    [Header("UI")]
-    [SerializeField] private GameObject lobbyPagePanel = null;
+
+
+    public void onExit()
+    {
+        Debug.Log("Quitting ...");
+        Application.Quit();
+    }
+
+    public void EnterMain()
+    {
+        landingPagePanel.SetActive(true);
+    }
 
     public void HostLobby()
     {
         networkManager.StartHost();
 
         landingPagePanel.SetActive(false);
-        lobbyPagePanel.SetActive(true);
     }
 }
