@@ -45,6 +45,11 @@ public class NetworkCustom : NetworkManager
  
         base.OnClientConnect(conn);
 
+        GameObject PlayerInfo = (GameObject)Instantiate(Resources.Load("PlayerInfo"));
+        NetworkServer.Spawn(PlayerInfo);
+        PlayerInfo.GetComponent<PlayerInfoData>().setUser(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
+        Players.Add(PlayerInfo);
+
         //GamePlayerMng.users.Add(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
         /* GameObject PlayerInfo = (GameObject)Instantiate(Resources.Load("PlayerInfo"));
         PlayerInfo.GetComponent<PlayerInfoData>().setUser(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
