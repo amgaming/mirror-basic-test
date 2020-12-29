@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.UI;
+using System;
 
 public class SyncTest : NetworkBehaviour
 {
     // Start is called before the first frame update
     [SyncVar]
-    private NetworkIdentity _userDataData;
+    List<GameObject> Players = new List<GameObject>();
 
     public override void OnStartAuthority() {
         base.OnStartAuthority();
@@ -15,12 +17,18 @@ public class SyncTest : NetworkBehaviour
     }
     void Start()
     {
+
+        GameObject PlayerInfo = (GameObject)Instantiate(Resources.Load("PlayerInfo"));
+        //NetworkServer.Spawn(PlayerInfo);
+        PlayerInfo.GetComponent<PlayerInfoData>().setUser(GameObject.Find("PlayerData").GetComponent<GamePlayerMng>().getUser());
+        Players.Add(PlayerInfo);
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        GameObject.Find("UsersListTextData").GetComponentInChildren<Text>().text = Players.Count.ToString();
         
     }
 }
