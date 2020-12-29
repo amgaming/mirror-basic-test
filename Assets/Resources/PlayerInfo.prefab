@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5100541122543348045}
   - component: {fileID: 8269146267639922861}
-  - component: {fileID: 5326668148885131271}
+  - component: {fileID: 2039801855762964660}
   m_Layer: 0
   m_Name: PlayerInfo
   m_TagString: Untagged
@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17abd6c5d3130423ea8e052f67e08d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5326668148885131271
+  syncMode: 0
+  syncInterval: 0.1
+  userName: 
+--- !u!114 &2039801855762964660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
