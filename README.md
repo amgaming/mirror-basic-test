@@ -12,4 +12,4 @@ Room3 -> 4
 
 And remember to include shaders required when building from edit/projectSettings/graphics
 
-[[https://github.com/amgaming/mirror-basic-test/blob/main/Docs/shaders_required_to_build_project.png|alt=shaders]]
+![shaders](./Docs/shaders_required_to_build_project.png)
