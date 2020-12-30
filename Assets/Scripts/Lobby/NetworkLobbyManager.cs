@@ -135,19 +135,22 @@ public class NetworkLobbyManager : NetworkManager
 
     public override void ServerChangeScene(string newSceneName)
     {
-        // From menu to game
+        // Here we can overwrite default ServerChangeScene to add some logic
+        // when we go from lobby menu to another scene (i.e. RoomBuilding)
+        // for example if we want to init some prefabs or some player config
+
         if (IsOnMenuScene() && newSceneName.StartsWith("RoomBuilding"))
         {
-            for (int i = RoomPlayers.Count - 1; i >= 0; i--)
-            {
-                var conn = RoomPlayers[i].connectionToClient;
+            // for (int i = RoomPlayers.Count - 1; i >= 0; i--)
+            // {
+            //     var conn = RoomPlayers[i].connectionToClient;
                 // var gameplayerInstance = Instantiate(gamePlayerPrefab);
                 // gameplayerInstance.SetDisplayName(RoomPlayers[i].DisplayName);
 
                 // NetworkServer.Destroy(conn.identity.gameObject);
 
                 // NetworkServer.ReplacePlayerForConnection(conn, gameplayerInstance.gameObject);
-            }
+            // }
         }
 
         base.ServerChangeScene(newSceneName);
@@ -155,7 +158,10 @@ public class NetworkLobbyManager : NetworkManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        // if (sceneName.StartsWith("Scene_Map"))
+        // This happens once the new scene has changed ok, so we can spawn 
+        // some items or whatever we want to do
+        
+        // if (sceneName.StartsWith("RoomBuilding"))
         // {
         //     GameObject playerSpawnSystemInstance = Instantiate(playerSpawnSystem);
         //     NetworkServer.Spawn(playerSpawnSystemInstance);
